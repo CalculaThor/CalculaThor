@@ -7,7 +7,7 @@ import (
 
 func Hellogui() {
 
-	fullgui:= gowd.NewElement("body")
+	fullgui := gowd.NewElement("head")
 	file, err := os.Open("gui/Interface.html")
 	if err != nil {
 		panic(err)
@@ -20,6 +20,8 @@ func Hellogui() {
 		fullgui.AddElement(element)
 	}
 
-	gowd.Run(fullgui)
-
+	err = gowd.Run(fullgui)
+	if err != nil {
+		panic(err)
+	}
 }
