@@ -5,23 +5,23 @@
     <title>Title</title>
 </head>
 <body>
-<div class="problem_panel">
+<div class="problem_panel" id="problem">
     <h2>Problem</h2>
-    <div class="problem_tab">
-        <p>What kind of problem do you want to solve?</p>
-        <select id="type_selector">
+    <div class="problem_tab" id="what">
+        <label for="type_selector">What kind of problem do you want to solve?</label><select id="type_selector">
             <option value="none" selected="selected">----Select an option----</option>
             <option value="single">Single-variable equation</option>
         </select>
     </div>
-    <div class="problem_tab">
+    <div class="problem_tab" id="which">
         <p>What's your problem?</p>
-        <input class="problem_def" placeholder="Enter your problem here" id="problem_def" autofocus>
+        <label for="problem_def">f(x) = </label>
+        <input class="problem_def" placeholder="Enter your problem here" id="problem_def">
     </div>
-    <div class="problem_tab">
-        <p>How do you want to solve your problem?</p>
-        <select id="method_selector">
+    <div class="problem_tab" id="how">
+        <label for="method_selector">How do you want to solve your problem?</label><select id="method_selector">
             <option value="none" selected="selected">----Select an option----</option>
+            <option value="search">Incremental Search</option>
             <option value="bisection">Bisection</option>
             <option value="false_pos">False Position (Regula falsi)</option>
             <option value="fixed_point">Fixed Point</option>
@@ -29,15 +29,22 @@
             <option value="secant">Secant</option>
         </select>
     </div>
-    <div class="problem_tab">
-        <p>First X value</p>
-        <input type="number">
-        <p>Second X value</p>
-        <input type="number">
-        <p>Tolerance</p>
-        <input type="number">
-        <p>Max. Iterations</p>
-        <input type="number">
+    <div class="problem_tab" id="data">
+        <label>First X value
+            <input type="number">
+        </label>
+        <label>Second X value
+            <input type="number">
+        </label>
+        <label>Delta
+            <input type="number">
+        </label>
+        <label>Tolerance
+            <input type="number" min="0">
+        </label>
+        <label>Max. Iterations
+            <input type="number" min="1" step="1">
+        </label>
 
     </div>
     <p></p>
