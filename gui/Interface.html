@@ -16,7 +16,7 @@
     <div class="problem_tab" id="which">
         <p>What's your problem?</p>
         <label for="single_problem_def">f(x) = </label>
-        <input class="single_problem_def" placeholder="Enter your problem here" autofocus id="single_problem_def">
+        <input class="single_problem_def" placeholder="Enter your problem here" id="single_problem_def">
     </div>
     <div class="problem_tab" id="how">
         <label for="single_method_selector">How do you want to solve your problem?</label><select id="single_method_selector">
@@ -33,22 +33,27 @@
         <div id="dfin"><label for="df">f'(x) = </label><input class="df_input" placeholder="?" id="df"></div>
         <div id="d2fin"><label for="d2f">f''(x) = </label><input class="d2f_input" placeholder="?" id="d2f"></div>
     </div>
-    <div class="problem_tab" id="data">
-        <label>First X value
-            <input type="number">
-        </label>
-        <label>Second X value
-            <input type="number">
-        </label>
-        <label>Delta
-            <input type="number">
-        </label>
-        <label>Tolerance
-            <input type="number" min="0">
-        </label>
-        <label>Max. Iterations
-            <input type="number" min="1" step="1">
-        </label>
+    <div class="single_problem_tab" id="single_data">
+        <div id="x1in"><label>First X value
+                <input type="number" id="x1">
+            </label></div>
+
+        <div id="x2in"><label>Second X value
+                <input type="number" id="x2">
+            </label></div>
+
+        <div id="dxin"><label>Delta
+                <input type="number" id="dx">
+            </label></div>
+
+        <div id="tolin"><label>Tolerance
+                <input type="number" min="0" id="tol">
+            </label></div>
+
+        <div id="itin"><label>Max. Iterations
+                <input type="number" min="1" step="1" id="it">
+            </label></div>
+
 
     </div>
     <p></p>

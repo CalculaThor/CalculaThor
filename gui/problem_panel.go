@@ -18,7 +18,7 @@ func beginPanel() *problemPanel {
 	p.definition = em["what"]
 	p.method = em["how"]
 	p.problem = em["which"]
-	p.in = em["data"]
+	p.in = em["single_data"]
 
 	p.method.Hide()
 	p.problem.Hide()
@@ -31,6 +31,9 @@ func beginPanel() *problemPanel {
 	em["type_selector"].OnEvent("onchange", p.openProblem)
 	em["single_problem_def"].OnEvent("onchange", p.openMethods)
 	em["single_method_selector"].OnEvent("onchange", p.openAdditionalInfo)
+	em["g"].OnEvent("onchange", p.gfuncentry)
+	em["df"].OnEvent("onchange", p.dfentry)
+	em["d2f"].OnEvent("onchange", p.d2fentry)
 
 	return p
 }
@@ -54,11 +57,31 @@ func (p *problemPanel) openMethods(sender *gowd.Element, event *gowd.EventElemen
 
 func (p *problemPanel) openAdditionalInfo(sender *gowd.Element, event *gowd.EventElement) {
 	switch sender.GetValue() {
-	case "none", "bisection", "false_pos", "secant", "search":
+	case "none":
+		em["gin"].Hide()
+		em["dfin"].Hide()
+		em["d2fin"].Hide()
+		p.in.Hide()
+	case "bisection", "false_pos", "secant":
 		em["gin"].Hide()
 		em["dfin"].Hide()
 		em["d2fin"].Hide()
 		p.in.Show()
+		em["x1in"].Show()
+		em["x2in"].Show()
+		em["dxin"].Hide()
+		em["tolin"].Show()
+		em["itin"].Show()
+	case "search":
+		em["gin"].Hide()
+		em["dfin"].Hide()
+		em["d2fin"].Hide()
+		p.in.Show()
+		em["x1in"].Show()
+		em["x2in"].Hide()
+		em["dxin"].Show()
+		em["tolin"].Hide()
+		em["itin"].Show()
 	case "fixed_point":
 		em["gin"].Show()
 		em["dfin"].Hide()
@@ -75,5 +98,38 @@ func (p *problemPanel) openAdditionalInfo(sender *gowd.Element, event *gowd.Even
 		em["d2fin"].Show()
 		p.in.Hide()
 
+	}
+}
+
+func (p *problemPanel) gfuncentry(sender *gowd.Element, event *gowd.EventElement) {
+	if sender.GetValue() != "" && em["single_method_selector"].GetValue() == "fixed_point" {
+		p.in.Show()
+		em["x1in"].Show()
+		em["x2in"].Hide()
+		em["dxin"].Hide()
+		em["tolin"].Show()
+		em["itin"].Show()
+	}
+}
+
+func (p *problemPanel) dfentry(sender *gowd.Element, event *gowd.EventElement) {
+	if val := em["single_method_selector"].GetValue(); sender.GetValue() != "" && (val == "newton" || val == "multi") {
+		p.in.Show()
+		em["x1in"].Show()
+		em["x2in"].Hide()
+		em["dxin"].Hide()
+		em["tolin"].Show()
+		em["itin"].Show()
+	}
+}
+
+func (p *problemPanel) d2fentry(sender *gowd.Element, event *gowd.EventElement) {
+	if sender.GetValue() != "" && em["single_method_selector"].GetValue() == "multi" && em["d2f"].GetValue() != "" {
+		p.in.Show()
+		em["x1in"].Show()
+		em["x2in"].Hide()
+		em["dxin"].Hide()
+		em["tolin"].Show()
+		em["itin"].Show()
 	}
 }
