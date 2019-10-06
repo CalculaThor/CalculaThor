@@ -5,7 +5,7 @@
     <title>Title</title>
 </head>
 <body>
-<div class="problem_panel" id="problem">
+<div class="problem_panel" id="problem_panel">
     <h2>Problem</h2>
     <div class="problem_tab" id="what">
         <label for="type_selector">What kind of problem do you want to solve?</label><select id="type_selector">
@@ -15,11 +15,11 @@
     </div>
     <div class="problem_tab" id="which">
         <p>What's your problem?</p>
-        <label for="problem_def">f(x) = </label>
-        <input class="problem_def" placeholder="Enter your problem here" id="problem_def">
+        <label for="single_problem_def">f(x) = </label>
+        <input class="single_problem_def" placeholder="Enter your problem here" autofocus id="single_problem_def">
     </div>
     <div class="problem_tab" id="how">
-        <label for="method_selector">How do you want to solve your problem?</label><select id="method_selector">
+        <label for="single_method_selector">How do you want to solve your problem?</label><select id="single_method_selector">
             <option value="none" selected="selected">----Select an option----</option>
             <option value="search">Incremental Search</option>
             <option value="bisection">Bisection</option>
@@ -27,7 +27,11 @@
             <option value="fixed_point">Fixed Point</option>
             <option value="newton">Newton</option>
             <option value="secant">Secant</option>
+            <option value="multi">Multiple Roots</option>
         </select>
+        <div id="gin"><label>g(x) = <input class="g_input" placeholder="?" id="g"></label></div>
+        <div id="dfin"><label for="df">f'(x) = </label><input class="df_input" placeholder="?" id="df"></div>
+        <div id="d2fin"><label for="d2f">f''(x) = </label><input class="d2f_input" placeholder="?" id="d2f"></div>
     </div>
     <div class="problem_tab" id="data">
         <label>First X value
