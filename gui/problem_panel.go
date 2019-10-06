@@ -10,6 +10,7 @@ type problemPanel struct {
 	problem    *gowd.Element
 	method     *gowd.Element
 	in         *gowd.Element
+	solve      *gowd.Element
 }
 
 func beginPanel() *problemPanel {
@@ -19,6 +20,7 @@ func beginPanel() *problemPanel {
 	p.method = em["how"]
 	p.problem = em["which"]
 	p.in = em["single_data"]
+	p.solve = em["submit_button"]
 
 	p.method.Hide()
 	p.problem.Hide()
@@ -34,6 +36,7 @@ func beginPanel() *problemPanel {
 	em["g"].OnEvent("onchange", p.gfuncentry)
 	em["df"].OnEvent("onchange", p.dfentry)
 	em["d2f"].OnEvent("onchange", p.d2fentry)
+	p.solve.OnEvent("onclick", p.beginSolve)
 
 	return p
 }
@@ -132,4 +135,8 @@ func (p *problemPanel) d2fentry(sender *gowd.Element, event *gowd.EventElement) 
 		em["tolin"].Show()
 		em["itin"].Show()
 	}
+}
+
+func (p *problemPanel) beginSolve(sender *gowd.Element, event *gowd.EventElement) {
+	sender.SetValue("Solved!")
 }

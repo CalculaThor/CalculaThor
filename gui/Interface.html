@@ -53,14 +53,18 @@
         <div id="itin"><label>Max. Iterations
                 <input type="number" min="1" step="1" id="it">
             </label></div>
-
+        <input type="button" id="submit_button" value="Solve">
 
     </div>
     <p></p>
 </div>
-<div class="solution_panel">
+<div class="solution_panel" id="solution_panel">
     <h2>Solution</h2>
-
+    <div id="single_solution">
+        <div id="plot"></div>
+        <div id="result_table"></div>
+        <div id="result"></div>
+    </div>
 </div>
 </body>
 </html>
