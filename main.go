@@ -3,5 +3,6 @@ package main
 import "CalculaThor/gui"
 
 func main() {
-	gui.Hellogui()
+	app := gui.Hellogui()
+	app.Run()
 }

@@ -1,20 +1,20 @@
 package gui
 
-import "github.com/dtylman/gowd"
+import (
+	"github.com/dtylman/gowd"
+)
 
-type singleVarSolutionPanel struct {
+type singleSolutionPanel struct {
 	*gowd.Element
 	table  *gowd.Element
 	result *gowd.Element
 	plt    *gowd.Element
 }
 
-func solve() *singleVarSolutionPanel {
-	p := &singleVarSolutionPanel{}
+func (p *singleSolutionPanel) beginSolution() {
 	p.Element = em["solution_panel"]
 	p.plt = em["plot"]
 	p.table = em["result_table"]
 	p.result = em["result"]
-
-	return p
+	p.Hide()
 }

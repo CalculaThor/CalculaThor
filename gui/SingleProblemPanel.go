@@ -4,23 +4,20 @@ import (
 	"github.com/dtylman/gowd"
 )
 
-type problemPanel struct {
+type singleProblemPanel struct {
 	*gowd.Element
 	definition *gowd.Element
 	problem    *gowd.Element
 	method     *gowd.Element
 	in         *gowd.Element
-	solve      *gowd.Element
 }
 
-func beginPanel() *problemPanel {
-	p := &problemPanel{}
+func (p *singleProblemPanel) beginProblem() {
 	p.Element = em["problem_panel"]
 	p.definition = em["what"]
 	p.method = em["how"]
 	p.problem = em["which"]
 	p.in = em["single_data"]
-	p.solve = em["submit_button"]
 
 	p.method.Hide()
 	p.problem.Hide()
@@ -36,19 +33,17 @@ func beginPanel() *problemPanel {
 	em["g"].OnEvent("onchange", p.gfuncentry)
 	em["df"].OnEvent("onchange", p.dfentry)
 	em["d2f"].OnEvent("onchange", p.d2fentry)
-	p.solve.OnEvent("onclick", p.beginSolve)
 
-	return p
 }
 
-func (p *problemPanel) openProblem(sender *gowd.Element, event *gowd.EventElement) {
+func (p *singleProblemPanel) openProblem(sender *gowd.Element, event *gowd.EventElement) {
 	switch sender.GetValue() {
 	case "single":
 		p.problem.Show()
 	}
 }
 
-func (p *problemPanel) openMethods(sender *gowd.Element, event *gowd.EventElement) {
+func (p *singleProblemPanel) openMethods(sender *gowd.Element, event *gowd.EventElement) {
 	switch em["type_selector"].GetValue() {
 	case "single":
 		//TODO: equation verification
@@ -58,7 +53,7 @@ func (p *problemPanel) openMethods(sender *gowd.Element, event *gowd.EventElemen
 	}
 }
 
-func (p *problemPanel) openAdditionalInfo(sender *gowd.Element, event *gowd.EventElement) {
+func (p *singleProblemPanel) openAdditionalInfo(sender *gowd.Element, event *gowd.EventElement) {
 	switch sender.GetValue() {
 	case "none":
 		em["gin"].Hide()
@@ -104,7 +99,7 @@ func (p *problemPanel) openAdditionalInfo(sender *gowd.Element, event *gowd.Even
 	}
 }
 
-func (p *problemPanel) gfuncentry(sender *gowd.Element, event *gowd.EventElement) {
+func (p *singleProblemPanel) gfuncentry(sender *gowd.Element, event *gowd.EventElement) {
 	if sender.GetValue() != "" && em["single_method_selector"].GetValue() == "fixed_point" {
 		p.in.Show()
 		em["x1in"].Show()
@@ -115,7 +110,7 @@ func (p *problemPanel) gfuncentry(sender *gowd.Element, event *gowd.EventElement
 	}
 }
 
-func (p *problemPanel) dfentry(sender *gowd.Element, event *gowd.EventElement) {
+func (p *singleProblemPanel) dfentry(sender *gowd.Element, event *gowd.EventElement) {
 	if val := em["single_method_selector"].GetValue(); sender.GetValue() != "" && (val == "newton" || val == "multi") {
 		p.in.Show()
 		em["x1in"].Show()
@@ -126,7 +121,7 @@ func (p *problemPanel) dfentry(sender *gowd.Element, event *gowd.EventElement) {
 	}
 }
 
-func (p *problemPanel) d2fentry(sender *gowd.Element, event *gowd.EventElement) {
+func (p *singleProblemPanel) d2fentry(sender *gowd.Element, event *gowd.EventElement) {
 	if sender.GetValue() != "" && em["single_method_selector"].GetValue() == "multi" && em["d2f"].GetValue() != "" {
 		p.in.Show()
 		em["x1in"].Show()
@@ -135,8 +130,4 @@ func (p *problemPanel) d2fentry(sender *gowd.Element, event *gowd.EventElement) 
 		em["tolin"].Show()
 		em["itin"].Show()
 	}
-}
-
-func (p *problemPanel) beginSolve(sender *gowd.Element, event *gowd.EventElement) {
-	sender.SetValue("Solved!")
 }

@@ -7,13 +7,14 @@ import (
 
 var em gowd.ElementsMap
 
-type app struct {
+type App struct {
 	*gowd.Element
-	problem *problemPanel
+	problem  *singleProblemPanel
+	solution *singleSolutionPanel
 }
 
-func Hellogui() {
-	a := &app{}
+func Hellogui() *App {
+	a := &App{}
 
 	fullgui := gowd.NewElement("head")
 	file, err := os.Open("gui/Interface.html")
@@ -25,15 +26,21 @@ func Hellogui() {
 	if err != nil {
 		panic(err)
 	}
-	a.Element = em["app"]
-	a.problem = beginPanel()
+	a.problem = &singleProblemPanel{}
+	a.problem.beginProblem()
+
+	a.solution = &singleSolutionPanel{}
+	a.solution.beginSolution()
 
 	for _, element := range elements {
 		fullgui.AddElement(element)
 	}
 
-	err = gowd.Run(fullgui)
-	if err != nil {
-		panic(err)
-	}
+	a.Element = fullgui
+
+	return a
+}
+
+func (a *App) Run() {
+	gowd.Run(a.Element)
 }
