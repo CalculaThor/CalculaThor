@@ -17,4 +17,5 @@ func (p *singleSolutionPanel) beginSolution() {
 	p.table = em["result_table"]
 	p.result = em["result"]
 	p.Hide()
+
 }

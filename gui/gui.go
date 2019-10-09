@@ -42,5 +42,8 @@ func Hellogui() *App {
 }
 
 func (a *App) Run() {
-	gowd.Run(a.Element)
+	err := gowd.Run(a.Element)
+	if err != nil {
+		panic(err)
+	}
 }
