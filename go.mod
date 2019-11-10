@@ -1,7 +1,7 @@
-module CalculaThor
+module github.com/CalculaThor/CalculaThor
 
-require CalculaThor/gui v0.0.0
+require github.com/CalculaThor/CalculaThor/gui v0.0.0
 
-replace CalculaThor/gui => ./gui
+require github.com/CalculaThor/CalculaThor/analyzer v0.0.0
 
 go 1.13

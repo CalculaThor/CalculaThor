@@ -4,7 +4,7 @@ import (
 	"github.com/dtylman/gowd"
 )
 
-type singleProblemPanel struct {
+type SingleProblemPanel struct {
 	*gowd.Element
 	definition *gowd.Element
 	problem    *gowd.Element
@@ -12,7 +12,7 @@ type singleProblemPanel struct {
 	in         *gowd.Element
 }
 
-func (p *singleProblemPanel) beginProblem() {
+func (p *SingleProblemPanel) beginProblem() {
 	p.Element = em["problem_panel"]
 	p.definition = em["what"]
 	p.method = em["how"]
@@ -36,14 +36,14 @@ func (p *singleProblemPanel) beginProblem() {
 
 }
 
-func (p *singleProblemPanel) openProblem(sender *gowd.Element, event *gowd.EventElement) {
+func (p *SingleProblemPanel) openProblem(sender *gowd.Element, event *gowd.EventElement) {
 	switch sender.GetValue() {
 	case "single":
 		p.problem.Show()
 	}
 }
 
-func (p *singleProblemPanel) openMethods(sender *gowd.Element, event *gowd.EventElement) {
+func (p *SingleProblemPanel) openMethods(sender *gowd.Element, event *gowd.EventElement) {
 	switch em["type_selector"].GetValue() {
 	case "single":
 		//TODO: equation verification
@@ -53,7 +53,7 @@ func (p *singleProblemPanel) openMethods(sender *gowd.Element, event *gowd.Event
 	}
 }
 
-func (p *singleProblemPanel) openAdditionalInfo(sender *gowd.Element, event *gowd.EventElement) {
+func (p *SingleProblemPanel) openAdditionalInfo(sender *gowd.Element, event *gowd.EventElement) {
 	switch sender.GetValue() {
 	case "none":
 		em["gin"].Hide()
@@ -99,7 +99,7 @@ func (p *singleProblemPanel) openAdditionalInfo(sender *gowd.Element, event *gow
 	}
 }
 
-func (p *singleProblemPanel) gfuncentry(sender *gowd.Element, event *gowd.EventElement) {
+func (p *SingleProblemPanel) gfuncentry(sender *gowd.Element, event *gowd.EventElement) {
 	if sender.GetValue() != "" && em["single_method_selector"].GetValue() == "fixed_point" {
 		p.in.Show()
 		em["x1in"].Show()
@@ -110,7 +110,7 @@ func (p *singleProblemPanel) gfuncentry(sender *gowd.Element, event *gowd.EventE
 	}
 }
 
-func (p *singleProblemPanel) dfentry(sender *gowd.Element, event *gowd.EventElement) {
+func (p *SingleProblemPanel) dfentry(sender *gowd.Element, event *gowd.EventElement) {
 	if val := em["single_method_selector"].GetValue(); sender.GetValue() != "" && (val == "newton" || val == "multi") {
 		p.in.Show()
 		em["x1in"].Show()
@@ -121,7 +121,7 @@ func (p *singleProblemPanel) dfentry(sender *gowd.Element, event *gowd.EventElem
 	}
 }
 
-func (p *singleProblemPanel) d2fentry(sender *gowd.Element, event *gowd.EventElement) {
+func (p *SingleProblemPanel) d2fentry(sender *gowd.Element, event *gowd.EventElement) {
 	if sender.GetValue() != "" && em["single_method_selector"].GetValue() == "multi" && em["d2f"].GetValue() != "" {
 		p.in.Show()
 		em["x1in"].Show()

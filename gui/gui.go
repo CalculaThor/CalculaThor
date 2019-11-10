@@ -9,8 +9,9 @@ var em gowd.ElementsMap
 
 type App struct {
 	*gowd.Element
-	problem  *singleProblemPanel
-	solution *singleSolutionPanel
+	problem  *SingleProblemPanel
+	solution *SingleSolutionPanel
+	Elements map[string]*gowd.Element
 }
 
 func Hellogui() *App {
@@ -26,10 +27,10 @@ func Hellogui() *App {
 	if err != nil {
 		panic(err)
 	}
-	a.problem = &singleProblemPanel{}
+	a.problem = &SingleProblemPanel{}
 	a.problem.beginProblem()
 
-	a.solution = &singleSolutionPanel{}
+	a.solution = &SingleSolutionPanel{}
 	a.solution.beginSolution()
 
 	for _, element := range elements {
@@ -37,6 +38,7 @@ func Hellogui() *App {
 	}
 
 	a.Element = fullgui
+	a.Elements = em
 
 	return a
 }

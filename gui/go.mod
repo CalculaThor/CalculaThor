@@ -1,4 +1,4 @@
-module CalculaThor/gui
+module github.com/CalculaThor/CalculaThor/gui
 
 require github.com/dtylman/gowd v0.0.0-20190619113956-15e38debca22
 
