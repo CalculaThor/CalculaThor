@@ -1,8 +1,8 @@
 package main
 
 import (
-	"calculathor/analyzer"
-	"calculathor/gui"
+	"github.com/CalculaThor/CalculaThor/analyzer"
+	"github.com/CalculaThor/CalculaThor/gui"
 )
 
 func main() {

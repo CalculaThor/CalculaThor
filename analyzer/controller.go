@@ -1,7 +1,7 @@
 package analyzer
 
 import (
-	"calculathor/analyzer/svanalyzer"
+	"github.com/CalculaThor/CalculaThor/analyzer/svanalyzer"
 	"github.com/dtylman/gowd"
 	"math"
 	"strconv"
