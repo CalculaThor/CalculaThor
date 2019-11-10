@@ -32,13 +32,26 @@ func solveSingleEquation() {
 	if err != nil {
 		return
 	}
+	panel := em["solution_panel"]
+	panel.RemoveElements()
+	panel.Show()
 	switch em["single_method_selector"].GetValue() {
 	case "bisection":
+
 		a, _ := strconv.ParseFloat(em["x1"].GetValue(), 64)
 		b, _ := strconv.ParseFloat(em["x2"].GetValue(), 64)
 		tol, _ := strconv.ParseFloat(em["tol"].GetValue(), 64)
 		maxit, _ := strconv.ParseInt(em["it"].GetValue(), 10, 32)
-		svanalyzer.Bisection(a, b, tol, uint(math.Abs(float64(maxit))))
+		ans := svanalyzer.Bisection(a, b, tol, uint(math.Abs(float64(maxit))))
+		if !ans.BadIn && !ans.IsAlmostRoot && !ans.IsRoot {
+			panel.AddElement(gowd.NewElement("h2")).SetValue("Not enough iterations.")
+		} else if ans.IsRoot {
+			panel.AddElement(gowd.NewElement("h2")).SetValue(strconv.FormatFloat(ans.Root, 'E', 10, 64))
+		} else if ans.IsAlmostRoot {
+			panel.AddElement(gowd.NewElement("h2")).SetValue(strconv.FormatFloat(ans.Root, 'E', 10, 64))
+		} else if ans.BadIn {
+			panel.AddElement(gowd.NewElement("h2")).SetValue("Bad In.")
+		}
 
 	case "false_pos":
 		a, _ := strconv.ParseFloat(em["x1"].GetValue(), 64)
