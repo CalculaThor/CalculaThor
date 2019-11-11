@@ -108,13 +108,21 @@ func solveSingleEquation() {
 		x0, _ := strconv.ParseFloat(em["x1"].GetValue(), 64)
 		tol, _ := strconv.ParseFloat(em["tol"].GetValue(), 64)
 		maxit, _ := strconv.ParseInt(em["it"].GetValue(), 10, 32)
+		g := em["g"].GetValue()
+		err := svanalyzer.SetG(g)
+		if err != nil {
+			return
+		}
 		ans := svanalyzer.FixedPoint(x0, tol, uint(math.Abs(float64(maxit))))
 		if !ans.BadIn && !ans.IsAlmostRoot && !ans.IsRoot {
 			panel.AddElement(gowd.NewElement("h2")).SetText("Not enough iterations.")
+			loadFixTable(panel)
 		} else if ans.IsRoot {
 			panel.AddElement(gowd.NewElement("h2")).SetText("The point x = " + strconv.FormatFloat(ans.Root, 'E', 3, 64) + " is a root.")
+			loadFixTable(panel)
 		} else if ans.IsAlmostRoot {
 			panel.AddElement(gowd.NewElement("h2")).SetText("The point x = " + strconv.FormatFloat(ans.Root, 'E', 3, 64) + " is almost a root.")
+			loadFixTable(panel)
 		} else if ans.BadIn {
 			panel.AddElement(gowd.NewElement("h2")).SetText("Bad In.")
 		}
@@ -166,13 +174,15 @@ func loadBisTable(panel *gowd.Element) {
 	header.AddElement(gowd.NewElement("th")).SetText("xm")
 	header.AddElement(gowd.NewElement("th")).SetText("xs")
 	header.AddElement(gowd.NewElement("th")).SetText("f(xm)")
+	header.AddElement(gowd.NewElement("th")).SetText("Error")
 	for _, reg := range table {
 		row := t.AddElement(gowd.NewElement("tr"))
 		row.AddElement(gowd.NewElement("th")).SetText(fmt.Sprintf("%d", reg.It))
 		row.AddElement(gowd.NewElement("th")).SetText(fmt.Sprintf("%g", reg.Xi))
 		row.AddElement(gowd.NewElement("th")).SetText(fmt.Sprintf("%g", reg.Xm))
-		row.AddElement(gowd.NewElement("th")).SetText(fmt.Sprintf("%g", reg.Xm))
+		row.AddElement(gowd.NewElement("th")).SetText(fmt.Sprintf("%g", reg.Xs))
 		row.AddElement(gowd.NewElement("th")).SetText(fmt.Sprintf("%g", reg.Fxm))
+		row.AddElement(gowd.NewElement("th")).SetText(fmt.Sprintf("%g", reg.Error))
 	}
 }
 
@@ -185,12 +195,48 @@ func loadFalTable(panel *gowd.Element) {
 	header.AddElement(gowd.NewElement("th")).SetText("xm")
 	header.AddElement(gowd.NewElement("th")).SetText("xs")
 	header.AddElement(gowd.NewElement("th")).SetText("f(xm)")
+	header.AddElement(gowd.NewElement("th")).SetText("Error")
 	for _, reg := range table {
 		row := t.AddElement(gowd.NewElement("tr"))
 		row.AddElement(gowd.NewElement("th")).SetText(fmt.Sprintf("%d", reg.It))
 		row.AddElement(gowd.NewElement("th")).SetText(fmt.Sprintf("%g", reg.Xi))
 		row.AddElement(gowd.NewElement("th")).SetText(fmt.Sprintf("%g", reg.Xm))
+		row.AddElement(gowd.NewElement("th")).SetText(fmt.Sprintf("%g", reg.Xs))
+		row.AddElement(gowd.NewElement("th")).SetText(fmt.Sprintf("%g", reg.Fxm))
+		row.AddElement(gowd.NewElement("th")).SetText(fmt.Sprintf("%g", reg.Error))
+	}
+}
+
+func loadFixTable(panel *gowd.Element) {
+	table := svanalyzer.FixedPointTable()
+	t := panel.AddElement(gowd.NewElement("table"))
+	header := t.AddElement(gowd.NewElement("tr"))
+	header.AddElement(gowd.NewElement("th")).SetText("n")
+	header.AddElement(gowd.NewElement("th")).SetText("xn")
+	header.AddElement(gowd.NewElement("th")).SetText("f(xn)")
+	header.AddElement(gowd.NewElement("th")).SetText("Error")
+	for _, reg := range table {
+		row := t.AddElement(gowd.NewElement("tr"))
+		row.AddElement(gowd.NewElement("th")).SetText(fmt.Sprintf("%d", reg.It))
 		row.AddElement(gowd.NewElement("th")).SetText(fmt.Sprintf("%g", reg.Xm))
 		row.AddElement(gowd.NewElement("th")).SetText(fmt.Sprintf("%g", reg.Fxm))
+		row.AddElement(gowd.NewElement("th")).SetText(fmt.Sprintf("%g", reg.Error))
+	}
+}
+
+func loadSecTable(panel *gowd.Element) {
+	table := svanalyzer.SecantTable()
+	t := panel.AddElement(gowd.NewElement("table"))
+	header := t.AddElement(gowd.NewElement("tr"))
+	header.AddElement(gowd.NewElement("th")).SetText("n")
+	header.AddElement(gowd.NewElement("th")).SetText("xn")
+	header.AddElement(gowd.NewElement("th")).SetText("f(xn)")
+	header.AddElement(gowd.NewElement("th")).SetText("Error")
+	for _, reg := range table {
+		row := t.AddElement(gowd.NewElement("tr"))
+		row.AddElement(gowd.NewElement("th")).SetText(fmt.Sprintf("%d", reg.It))
+		row.AddElement(gowd.NewElement("th")).SetText(fmt.Sprintf("%g", reg.Xm))
+		row.AddElement(gowd.NewElement("th")).SetText(fmt.Sprintf("%g", reg.Fxm))
+		row.AddElement(gowd.NewElement("th")).SetText(fmt.Sprintf("%g", reg.Error))
 	}
 }

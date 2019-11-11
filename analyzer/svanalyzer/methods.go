@@ -15,23 +15,23 @@ type RootAnswer struct {
 }
 
 type Reg1 struct {
-	Xi, Xs, Xm, Fxm float64
-	It              int
+	Xi, Xs, Xm, Fxm, Error float64
+	It                     int
 }
 
 type Reg2 struct {
-	Xm, Fxm float64
-	It      int
+	Xm, Fxm, Error float64
+	It             int
 }
 
 type Reg3 struct {
-	Xm, Fxm, Dfxm, D2fxm float64
-	It                   int
+	Xm, Fxm, Dfxm, D2fxm, Error float64
+	It                          int
 }
 
 type Reg4 struct {
-	Xm, Fxm, Dfxm float64
-	It            int
+	Xm, Fxm, Dfxm, Error float64
+	It                   int
 }
 
 var bisTable, falTable []Reg1
@@ -111,7 +111,7 @@ func Bisection(a, b, tolerance float64, maxIt uint) (ans *RootAnswer) {
 	count := uint(1)
 	var temp float64
 
-	bisTable = append(bisTable, Reg1{xi, xs, xm, ym, int(count)})
+	bisTable = append(bisTable, Reg1{xi, xs, xm, ym, err, int(count)})
 	for ym != 0 && err > tolerance && count < maxIt {
 		if yi*ym < 0 {
 			xs = xm
@@ -128,7 +128,7 @@ func Bisection(a, b, tolerance float64, maxIt uint) (ans *RootAnswer) {
 			err /= math.Abs(xm)
 		}
 		count++
-		bisTable = append(bisTable, Reg1{xi, xs, xm, ym, int(count)})
+		bisTable = append(bisTable, Reg1{xi, xs, xm, ym, err, int(count)})
 	}
 	ans.Iterations = count
 	if ym == 0 {
@@ -172,7 +172,7 @@ func FalsePosition(a, b, tolerance float64, maxIt uint) (ans *RootAnswer) {
 	err := math.MaxFloat64
 	count := uint(1)
 	var temp float64
-	falTable = append(falTable, Reg1{xi, xs, xm, ym, int(count)})
+	falTable = append(falTable, Reg1{xi, xs, xm, ym, err, int(count)})
 	for ym != 0 && err > tolerance && count < maxIt {
 		if yi*ym < 0 {
 			xs = xm
@@ -189,7 +189,7 @@ func FalsePosition(a, b, tolerance float64, maxIt uint) (ans *RootAnswer) {
 			err /= math.Abs(xm)
 		}
 		count++
-		falTable = append(falTable, Reg1{xi, xs, xm, ym, int(count)})
+		falTable = append(falTable, Reg1{xi, xs, xm, ym, err, int(count)})
 	}
 	ans.Iterations = count
 	if ym == 0 {
@@ -214,7 +214,7 @@ func FixedPoint(x0, tolerance float64, maxIt uint) (ans *RootAnswer) {
 	err := math.MaxFloat64
 	count := uint(0)
 	var last float64
-	fixTable = append(fixTable, Reg2{xn, yn, 0})
+	fixTable = append(fixTable, Reg2{xn, yn, err, 0})
 
 	for yn != 0 && err > tolerance && count < maxIt {
 		last = xn
@@ -225,7 +225,7 @@ func FixedPoint(x0, tolerance float64, maxIt uint) (ans *RootAnswer) {
 			err /= math.Abs(xn)
 		}
 		count++
-		fixTable = append(fixTable, Reg2{xn, yn, int(count)})
+		fixTable = append(fixTable, Reg2{xn, yn, err, int(count)})
 	}
 	ans.Iterations = count
 	if yn == 0 {
@@ -250,7 +250,7 @@ func Newton(x0, tolerance float64, maxIt uint) (ans *RootAnswer) {
 	count := uint(0)
 	err := math.MaxFloat64
 	var x1 float64
-	newTable = append(newTable, Reg4{x, y, dy, 0})
+	newTable = append(newTable, Reg4{x, y, dy, err, 0})
 	for y != 0 && err > tolerance && dy != 0 && count < maxIt {
 		x1 = x - y/dy
 		y, _ = F(x1)
@@ -261,7 +261,7 @@ func Newton(x0, tolerance float64, maxIt uint) (ans *RootAnswer) {
 		}
 		x = x1
 		count++
-		newTable = append(newTable, Reg4{x, y, dy, int(count)})
+		newTable = append(newTable, Reg4{x, y, dy, err, int(count)})
 	}
 	ans.Iterations = count
 	if y == 0 {
@@ -308,7 +308,7 @@ func Secant(a, b, tolerance float64, maxIt uint) (ans *RootAnswer) {
 		x1 = x2
 		y1, _ = F(x1)
 		count++
-		secTable = append(secTable, Reg2{x1, y1, int(count)})
+		secTable = append(secTable, Reg2{x1, y1, err, int(count)})
 	}
 	ans.Iterations = count
 	if y1 == 0 {
@@ -338,7 +338,7 @@ func MultipeRoot(x0, tolerance float64, maxIt uint) (ans *RootAnswer) {
 	count := uint(0)
 	err := math.MaxFloat64
 	var x1 float64
-	mulTable = append(mulTable, Reg3{x, y, dy, d2y, 0})
+	mulTable = append(mulTable, Reg3{x, y, dy, d2y, err, 0})
 	for y != 0 && err > tolerance && dy2 != y*d2y && count < maxIt {
 		x1 = x - (y*dy)/(dy2-y*d2y)
 		y, _ = F(x1)
@@ -351,7 +351,7 @@ func MultipeRoot(x0, tolerance float64, maxIt uint) (ans *RootAnswer) {
 		}
 		x = x1
 		count++
-		mulTable = append(mulTable, Reg3{x, y, dy, d2y, int(count)})
+		mulTable = append(mulTable, Reg3{x, y, dy, d2y, err, int(count)})
 	}
 	ans.Iterations = count
 	if y == 0 {
