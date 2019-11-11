@@ -45,13 +45,15 @@ func solveSingleEquation() {
 		tol, _ := strconv.ParseFloat(em["tol"].GetValue(), 64)
 		maxit, _ := strconv.ParseInt(em["it"].GetValue(), 10, 32)
 		ans := svanalyzer.Bisection(a, b, tol, uint(math.Abs(float64(maxit))))
-		loadBisTable(panel)
 		if !ans.BadIn && !ans.IsAlmostRoot && !ans.IsRoot {
 			panel.AddElement(gowd.NewElement("h2")).SetText("Not enough iterations.")
+			loadBisTable(panel)
 		} else if ans.IsRoot {
 			panel.AddElement(gowd.NewElement("h2")).SetText("The point x = " + strconv.FormatFloat(ans.Root, 'E', 3, 64) + " is a root.")
+			loadBisTable(panel)
 		} else if ans.IsAlmostRoot {
 			panel.AddElement(gowd.NewElement("h2")).SetText("The point x = " + strconv.FormatFloat(ans.Root, 'E', 3, 64) + " is almost a root.")
+			loadBisTable(panel)
 		} else if ans.BadIn {
 			panel.AddElement(gowd.NewElement("h2")).SetText("Bad In.")
 		}
@@ -64,10 +66,13 @@ func solveSingleEquation() {
 		ans := svanalyzer.FalsePosition(a, b, tol, uint(math.Abs(float64(maxit))))
 		if !ans.BadIn && !ans.IsAlmostRoot && !ans.IsRoot {
 			panel.AddElement(gowd.NewElement("h2")).SetText("Not enough iterations.")
+			loadFalTable(panel)
 		} else if ans.IsRoot {
 			panel.AddElement(gowd.NewElement("h2")).SetText("The point x = " + strconv.FormatFloat(ans.Root, 'E', 3, 64) + " is a root.")
+			loadFalTable(panel)
 		} else if ans.IsAlmostRoot {
 			panel.AddElement(gowd.NewElement("h2")).SetText("The point x = " + strconv.FormatFloat(ans.Root, 'E', 3, 64) + " is almost a root.")
+			loadFalTable(panel)
 		} else if ans.BadIn {
 			panel.AddElement(gowd.NewElement("h2")).SetText("Bad In.")
 		}
@@ -163,7 +168,26 @@ func loadBisTable(panel *gowd.Element) {
 	header.AddElement(gowd.NewElement("th")).SetText("f(xm)")
 	for _, reg := range table {
 		row := t.AddElement(gowd.NewElement("tr"))
-		row.AddElement(gowd.NewElement("th")).SetText(fmt.Sprintf("%g", reg.It))
+		row.AddElement(gowd.NewElement("th")).SetText(fmt.Sprintf("%d", reg.It))
+		row.AddElement(gowd.NewElement("th")).SetText(fmt.Sprintf("%g", reg.Xi))
+		row.AddElement(gowd.NewElement("th")).SetText(fmt.Sprintf("%g", reg.Xm))
+		row.AddElement(gowd.NewElement("th")).SetText(fmt.Sprintf("%g", reg.Xm))
+		row.AddElement(gowd.NewElement("th")).SetText(fmt.Sprintf("%g", reg.Fxm))
+	}
+}
+
+func loadFalTable(panel *gowd.Element) {
+	table := svanalyzer.FalsePosTable()
+	t := panel.AddElement(gowd.NewElement("table"))
+	header := t.AddElement(gowd.NewElement("tr"))
+	header.AddElement(gowd.NewElement("th")).SetText("n")
+	header.AddElement(gowd.NewElement("th")).SetText("xi")
+	header.AddElement(gowd.NewElement("th")).SetText("xm")
+	header.AddElement(gowd.NewElement("th")).SetText("xs")
+	header.AddElement(gowd.NewElement("th")).SetText("f(xm)")
+	for _, reg := range table {
+		row := t.AddElement(gowd.NewElement("tr"))
+		row.AddElement(gowd.NewElement("th")).SetText(fmt.Sprintf("%d", reg.It))
 		row.AddElement(gowd.NewElement("th")).SetText(fmt.Sprintf("%g", reg.Xi))
 		row.AddElement(gowd.NewElement("th")).SetText(fmt.Sprintf("%g", reg.Xm))
 		row.AddElement(gowd.NewElement("th")).SetText(fmt.Sprintf("%g", reg.Xm))
