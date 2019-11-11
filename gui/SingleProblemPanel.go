@@ -53,6 +53,7 @@ func (p *SingleProblemPanel) openMethods(sender *gowd.Element, event *gowd.Event
 }
 
 func (p *SingleProblemPanel) openAdditionalInfo(sender *gowd.Element, event *gowd.EventElement) {
+	em["solution_panel"].Hide()
 	switch sender.GetValue() {
 	case "none":
 		em["gin"].Hide()

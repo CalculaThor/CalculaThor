@@ -18,6 +18,7 @@ func BeginAnalyzer(mp map[string]*gowd.Element) {
 }
 
 func initSolution(sender *gowd.Element, event *gowd.EventElement) {
+	em["solution_panel"].Show()
 	switch em["type_selector"].GetValue() {
 	case "single":
 		solveSingleEquation()
@@ -84,10 +85,13 @@ func solveSingleEquation() {
 		ans := svanalyzer.Secant(a, b, tol, uint(math.Abs(float64(maxit))))
 		if !ans.BadIn && !ans.IsAlmostRoot && !ans.IsRoot {
 			panel.AddElement(gowd.NewElement("h2")).SetText("Not enough iterations.")
+			loadSecTable(panel)
 		} else if ans.IsRoot {
 			panel.AddElement(gowd.NewElement("h2")).SetText("The point x = " + strconv.FormatFloat(ans.Root, 'E', 3, 64) + " is a root.")
+			loadSecTable(panel)
 		} else if ans.IsAlmostRoot {
 			panel.AddElement(gowd.NewElement("h2")).SetText("The point x = " + strconv.FormatFloat(ans.Root, 'E', 3, 64) + " is almost a root.")
+			loadSecTable(panel)
 		} else if ans.BadIn {
 			panel.AddElement(gowd.NewElement("h2")).SetText("Bad In.")
 		}
@@ -130,13 +134,21 @@ func solveSingleEquation() {
 		x0, _ := strconv.ParseFloat(em["x1"].GetValue(), 64)
 		tol, _ := strconv.ParseFloat(em["tol"].GetValue(), 64)
 		maxit, _ := strconv.ParseInt(em["it"].GetValue(), 10, 32)
+		df := em["df"].GetValue()
+		err := svanalyzer.SetDF(df)
+		if err != nil {
+			return
+		}
 		ans := svanalyzer.Newton(x0, tol, uint(math.Abs(float64(maxit))))
 		if !ans.BadIn && !ans.IsAlmostRoot && !ans.IsRoot {
 			panel.AddElement(gowd.NewElement("h2")).SetText("Not enough iterations.")
+			loadNewTable(panel)
 		} else if ans.IsRoot {
 			panel.AddElement(gowd.NewElement("h2")).SetText("The point x = " + strconv.FormatFloat(ans.Root, 'E', 3, 64) + " is a root.")
+			loadNewTable(panel)
 		} else if ans.IsAlmostRoot {
 			panel.AddElement(gowd.NewElement("h2")).SetText("The point x = " + strconv.FormatFloat(ans.Root, 'E', 3, 64) + " is almost a root.")
+			loadNewTable(panel)
 		} else if ans.BadIn {
 			panel.AddElement(gowd.NewElement("h2")).SetText("Bad In.")
 		}
@@ -144,13 +156,26 @@ func solveSingleEquation() {
 		x0, _ := strconv.ParseFloat(em["x1"].GetValue(), 64)
 		tol, _ := strconv.ParseFloat(em["tol"].GetValue(), 64)
 		maxit, _ := strconv.ParseInt(em["it"].GetValue(), 10, 32)
+		df := em["df"].GetValue()
+		err := svanalyzer.SetDF(df)
+		if err != nil {
+			return
+		}
+		d2f := em["d2f"].GetValue()
+		err = svanalyzer.SetD2F(d2f)
+		if err != nil {
+			return
+		}
 		ans := svanalyzer.MultipeRoot(x0, tol, uint(math.Abs(float64(maxit))))
 		if !ans.BadIn && !ans.IsAlmostRoot && !ans.IsRoot {
 			panel.AddElement(gowd.NewElement("h2")).SetText("Not enough iterations.")
+			loadMulTable(panel)
 		} else if ans.IsRoot {
 			panel.AddElement(gowd.NewElement("h2")).SetText("The point x = " + strconv.FormatFloat(ans.Root, 'E', 3, 64) + " is a root.")
+			loadMulTable(panel)
 		} else if ans.IsAlmostRoot {
 			panel.AddElement(gowd.NewElement("h2")).SetText("The point x = " + strconv.FormatFloat(ans.Root, 'E', 3, 64) + " is almost a root.")
+			loadMulTable(panel)
 		} else if ans.BadIn {
 			panel.AddElement(gowd.NewElement("h2")).SetText("Bad In.")
 		}
@@ -237,6 +262,46 @@ func loadSecTable(panel *gowd.Element) {
 		row.AddElement(gowd.NewElement("th")).SetText(fmt.Sprintf("%d", reg.It))
 		row.AddElement(gowd.NewElement("th")).SetText(fmt.Sprintf("%g", reg.Xm))
 		row.AddElement(gowd.NewElement("th")).SetText(fmt.Sprintf("%g", reg.Fxm))
+		row.AddElement(gowd.NewElement("th")).SetText(fmt.Sprintf("%g", reg.Error))
+	}
+}
+
+func loadMulTable(panel *gowd.Element) {
+	table := svanalyzer.MultipleRootTable()
+	t := panel.AddElement(gowd.NewElement("table"))
+	header := t.AddElement(gowd.NewElement("tr"))
+	header.AddElement(gowd.NewElement("th")).SetText("n")
+	header.AddElement(gowd.NewElement("th")).SetText("xn")
+	header.AddElement(gowd.NewElement("th")).SetText("f(xn)")
+	header.AddElement(gowd.NewElement("th")).SetText("f'(xn)")
+	header.AddElement(gowd.NewElement("th")).SetText("f\"(xn)")
+	header.AddElement(gowd.NewElement("th")).SetText("Error")
+	for _, reg := range table {
+		row := t.AddElement(gowd.NewElement("tr"))
+		row.AddElement(gowd.NewElement("th")).SetText(fmt.Sprintf("%d", reg.It))
+		row.AddElement(gowd.NewElement("th")).SetText(fmt.Sprintf("%g", reg.Xm))
+		row.AddElement(gowd.NewElement("th")).SetText(fmt.Sprintf("%g", reg.Fxm))
+		row.AddElement(gowd.NewElement("th")).SetText(fmt.Sprintf("%g", reg.Dfxm))
+		row.AddElement(gowd.NewElement("th")).SetText(fmt.Sprintf("%g", reg.D2fxm))
+		row.AddElement(gowd.NewElement("th")).SetText(fmt.Sprintf("%g", reg.Error))
+	}
+}
+
+func loadNewTable(panel *gowd.Element) {
+	table := svanalyzer.NewtonTable()
+	t := panel.AddElement(gowd.NewElement("table"))
+	header := t.AddElement(gowd.NewElement("tr"))
+	header.AddElement(gowd.NewElement("th")).SetText("n")
+	header.AddElement(gowd.NewElement("th")).SetText("xn")
+	header.AddElement(gowd.NewElement("th")).SetText("f(xn)")
+	header.AddElement(gowd.NewElement("th")).SetText("f'(xn)")
+	header.AddElement(gowd.NewElement("th")).SetText("Error")
+	for _, reg := range table {
+		row := t.AddElement(gowd.NewElement("tr"))
+		row.AddElement(gowd.NewElement("th")).SetText(fmt.Sprintf("%d", reg.It))
+		row.AddElement(gowd.NewElement("th")).SetText(fmt.Sprintf("%g", reg.Xm))
+		row.AddElement(gowd.NewElement("th")).SetText(fmt.Sprintf("%g", reg.Fxm))
+		row.AddElement(gowd.NewElement("th")).SetText(fmt.Sprintf("%g", reg.Dfxm))
 		row.AddElement(gowd.NewElement("th")).SetText(fmt.Sprintf("%g", reg.Error))
 	}
 }
