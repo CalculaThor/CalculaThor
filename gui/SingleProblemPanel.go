@@ -30,9 +30,9 @@ func (p *SingleProblemPanel) beginProblem() {
 	em["type_selector"].OnEvent("onchange", p.openProblem)
 	em["single_problem_def"].OnEvent("onchange", p.openMethods)
 	em["single_method_selector"].OnEvent("onchange", p.openAdditionalInfo)
-	em["g"].OnEvent("onchange", p.gfuncentry)
-	em["df"].OnEvent("onchange", p.dfentry)
-	em["d2f"].OnEvent("onchange", p.d2fentry)
+	em["g"].OnEvent("onchange", p.gFuncEntry)
+	em["df"].OnEvent("onchange", p.dfEntry)
+	em["d2f"].OnEvent("onchange", p.d2fEntry)
 
 }
 
@@ -46,7 +46,6 @@ func (p *SingleProblemPanel) openProblem(sender *gowd.Element, event *gowd.Event
 func (p *SingleProblemPanel) openMethods(sender *gowd.Element, event *gowd.EventElement) {
 	switch em["type_selector"].GetValue() {
 	case "single":
-		//TODO: equation verification
 		if p.method.Hidden {
 			p.method.Show()
 		}
@@ -70,6 +69,8 @@ func (p *SingleProblemPanel) openAdditionalInfo(sender *gowd.Element, event *gow
 		em["dxin"].Hide()
 		em["tolin"].Show()
 		em["itin"].Show()
+		em["relative"].Show()
+		em["absolute"].Show()
 	case "search":
 		em["gin"].Hide()
 		em["dfin"].Hide()
@@ -80,6 +81,8 @@ func (p *SingleProblemPanel) openAdditionalInfo(sender *gowd.Element, event *gow
 		em["dxin"].Show()
 		em["tolin"].Hide()
 		em["itin"].Show()
+		em["relative"].Hide()
+		em["absolute"].Hide()
 	case "fixed_point":
 		em["gin"].Show()
 		em["dfin"].Hide()
@@ -99,7 +102,7 @@ func (p *SingleProblemPanel) openAdditionalInfo(sender *gowd.Element, event *gow
 	}
 }
 
-func (p *SingleProblemPanel) gfuncentry(sender *gowd.Element, event *gowd.EventElement) {
+func (p *SingleProblemPanel) gFuncEntry(sender *gowd.Element, event *gowd.EventElement) {
 	if sender.GetValue() != "" && em["single_method_selector"].GetValue() == "fixed_point" {
 		p.in.Show()
 		em["x1in"].Show()
@@ -107,10 +110,12 @@ func (p *SingleProblemPanel) gfuncentry(sender *gowd.Element, event *gowd.EventE
 		em["dxin"].Hide()
 		em["tolin"].Show()
 		em["itin"].Show()
+		em["relative"].Show()
+		em["absolute"].Show()
 	}
 }
 
-func (p *SingleProblemPanel) dfentry(sender *gowd.Element, event *gowd.EventElement) {
+func (p *SingleProblemPanel) dfEntry(sender *gowd.Element, event *gowd.EventElement) {
 	if val := em["single_method_selector"].GetValue(); sender.GetValue() != "" && (val == "newton" || val == "multi") {
 		p.in.Show()
 		em["x1in"].Show()
@@ -118,10 +123,12 @@ func (p *SingleProblemPanel) dfentry(sender *gowd.Element, event *gowd.EventElem
 		em["dxin"].Hide()
 		em["tolin"].Show()
 		em["itin"].Show()
+		em["relative"].Show()
+		em["absolute"].Show()
 	}
 }
 
-func (p *SingleProblemPanel) d2fentry(sender *gowd.Element, event *gowd.EventElement) {
+func (p *SingleProblemPanel) d2fEntry(sender *gowd.Element, event *gowd.EventElement) {
 	if sender.GetValue() != "" && em["single_method_selector"].GetValue() == "multi" && em["d2f"].GetValue() != "" {
 		p.in.Show()
 		em["x1in"].Show()
@@ -129,5 +136,7 @@ func (p *SingleProblemPanel) d2fentry(sender *gowd.Element, event *gowd.EventEle
 		em["dxin"].Hide()
 		em["tolin"].Show()
 		em["itin"].Show()
+		em["relative"].Show()
+		em["absolute"].Show()
 	}
 }

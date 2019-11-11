@@ -3,6 +3,11 @@ module github.com/CalculaThor/CalculaThor
 go 1.13
 
 require (
-	github.com/CalculaThor/CalculaThor/analyzer v0.0.0-20191110215701-9fc80f1bdfde
+	github.com/CalculaThor/CalculaThor/analyzer v0.0.0-20191110232331-384c76640fc2
+	github.com/CalculaThor/CalculaThor/analyzer/svanalyzer v0.0.0-20191110232331-384c76640fc2 // indirect
 	github.com/CalculaThor/CalculaThor/gui v0.0.0-20191110215117-1b851d185092
 )
+
+replace github.com/CalculaThor/CalculaThor/analyzer => ./analyzer
+
+replace github.com/CalculaThor/CalculaThor/gui => ./gui

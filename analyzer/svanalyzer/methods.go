@@ -85,7 +85,7 @@ func IncrementalSearch(x0, dx float64, maxIt uint) (ans *RootRange) {
 
 func Bisection(a, b, tolerance float64, maxIt uint) (ans *RootAnswer) {
 	ans = &RootAnswer{}
-	bisTable = make([]Reg1, 0)
+	bisTable = make([]Reg1, 0, int(maxIt))
 	xi := a
 	yi, _ := F(xi)
 	if yi == 0 {
@@ -147,7 +147,7 @@ func Bisection(a, b, tolerance float64, maxIt uint) (ans *RootAnswer) {
 
 func FalsePosition(a, b, tolerance float64, maxIt uint) (ans *RootAnswer) {
 	ans = &RootAnswer{}
-	falTable = make([]Reg1, 0)
+	falTable = make([]Reg1, 0, int(maxIt))
 	xi := a
 	yi, _ := F(xi)
 	if yi == 0 {
@@ -208,7 +208,7 @@ func FalsePosition(a, b, tolerance float64, maxIt uint) (ans *RootAnswer) {
 
 func FixedPoint(x0, tolerance float64, maxIt uint) (ans *RootAnswer) {
 	ans = &RootAnswer{}
-	fixTable = make([]Reg2, 0)
+	fixTable = make([]Reg2, 0, int(maxIt))
 	xn := x0
 	yn, _ := F(xn)
 	err := math.MaxFloat64
@@ -243,7 +243,7 @@ func FixedPoint(x0, tolerance float64, maxIt uint) (ans *RootAnswer) {
 
 func Newton(x0, tolerance float64, maxIt uint) (ans *RootAnswer) {
 	ans = &RootAnswer{}
-	newTable = make([]Reg4, 0)
+	newTable = make([]Reg4, 0, int(maxIt))
 	x := x0
 	y, _ := F(x)
 	dy, _ := DF(x)
@@ -284,7 +284,7 @@ func Newton(x0, tolerance float64, maxIt uint) (ans *RootAnswer) {
 
 func Secant(a, b, tolerance float64, maxIt uint) (ans *RootAnswer) {
 	ans = &RootAnswer{}
-	secTable = make([]Reg2, 0)
+	secTable = make([]Reg2, 0, int(maxIt))
 	x0 := a
 	y0, _ := F(x0)
 	if y0 == 0 {
@@ -329,7 +329,7 @@ func Secant(a, b, tolerance float64, maxIt uint) (ans *RootAnswer) {
 
 func MultipeRoot(x0, tolerance float64, maxIt uint) (ans *RootAnswer) {
 	ans = &RootAnswer{}
-	mulTable = make([]Reg3, 0)
+	mulTable = make([]Reg3, 0, int(maxIt))
 	x := x0
 	y, _ := F(x)
 	dy, _ := DF(x)
@@ -378,4 +378,28 @@ func SetRelativeError() {
 
 func SetAbsoluteError() {
 	relativeError = false
+}
+
+func BisectionTable() []Reg1 {
+	return bisTable
+}
+
+func FalsePosTable() []Reg1 {
+	return falTable
+}
+
+func FixedPointTable() []Reg2 {
+	return fixTable
+}
+
+func NewtonTable() []Reg4 {
+	return newTable
+}
+
+func SecantTable() []Reg2 {
+	return secTable
+}
+
+func MultipleRootTable() []Reg3 {
+	return mulTable
 }
