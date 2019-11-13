@@ -1,4 +1,4 @@
-package main
+package seanalyzer
 
 import (
 	"math"
