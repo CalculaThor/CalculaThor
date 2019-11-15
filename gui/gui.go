@@ -9,7 +9,7 @@ var em gowd.ElementsMap
 
 type App struct {
 	*gowd.Element
-	problem  *SingleProblemPanel
+	problem  *ProblemPanel
 	solution *SingleSolutionPanel
 	Elements map[string]*gowd.Element
 }
@@ -27,7 +27,7 @@ func Hellogui() *App {
 	if err != nil {
 		panic(err)
 	}
-	a.problem = &SingleProblemPanel{}
+	a.problem = &ProblemPanel{}
 	a.problem.beginProblem()
 
 	a.solution = &SingleSolutionPanel{}

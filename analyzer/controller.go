@@ -202,12 +202,12 @@ func loadBisTable(panel *gowd.Element) {
 	header.AddElement(gowd.NewElement("th")).SetText("Error")
 	for _, reg := range table {
 		row := t.AddElement(gowd.NewElement("tr"))
-		row.AddElement(gowd.NewElement("th")).SetText(fmt.Sprintf("%d", reg.It))
-		row.AddElement(gowd.NewElement("th")).SetText(fmt.Sprintf("%g", reg.Xi))
-		row.AddElement(gowd.NewElement("th")).SetText(fmt.Sprintf("%g", reg.Xm))
-		row.AddElement(gowd.NewElement("th")).SetText(fmt.Sprintf("%g", reg.Xs))
-		row.AddElement(gowd.NewElement("th")).SetText(fmt.Sprintf("%g", reg.Fxm))
-		row.AddElement(gowd.NewElement("th")).SetText(fmt.Sprintf("%g", reg.Error))
+		row.AddElement(gowd.NewElement("td")).SetText(fmt.Sprintf("%d", reg.It))
+		row.AddElement(gowd.NewElement("td")).SetText(fmt.Sprintf("%g", reg.Xi))
+		row.AddElement(gowd.NewElement("td")).SetText(fmt.Sprintf("%g", reg.Xm))
+		row.AddElement(gowd.NewElement("td")).SetText(fmt.Sprintf("%g", reg.Xs))
+		row.AddElement(gowd.NewElement("td")).SetText(fmt.Sprintf("%g", reg.Fxm))
+		row.AddElement(gowd.NewElement("td")).SetText(fmt.Sprintf("%g", reg.Error))
 	}
 }
 
@@ -223,12 +223,12 @@ func loadFalTable(panel *gowd.Element) {
 	header.AddElement(gowd.NewElement("th")).SetText("Error")
 	for _, reg := range table {
 		row := t.AddElement(gowd.NewElement("tr"))
-		row.AddElement(gowd.NewElement("th")).SetText(fmt.Sprintf("%d", reg.It))
-		row.AddElement(gowd.NewElement("th")).SetText(fmt.Sprintf("%g", reg.Xi))
-		row.AddElement(gowd.NewElement("th")).SetText(fmt.Sprintf("%g", reg.Xm))
-		row.AddElement(gowd.NewElement("th")).SetText(fmt.Sprintf("%g", reg.Xs))
-		row.AddElement(gowd.NewElement("th")).SetText(fmt.Sprintf("%g", reg.Fxm))
-		row.AddElement(gowd.NewElement("th")).SetText(fmt.Sprintf("%g", reg.Error))
+		row.AddElement(gowd.NewElement("td")).SetText(fmt.Sprintf("%d", reg.It))
+		row.AddElement(gowd.NewElement("td")).SetText(fmt.Sprintf("%g", reg.Xi))
+		row.AddElement(gowd.NewElement("td")).SetText(fmt.Sprintf("%g", reg.Xm))
+		row.AddElement(gowd.NewElement("td")).SetText(fmt.Sprintf("%g", reg.Xs))
+		row.AddElement(gowd.NewElement("td")).SetText(fmt.Sprintf("%g", reg.Fxm))
+		row.AddElement(gowd.NewElement("td")).SetText(fmt.Sprintf("%g", reg.Error))
 	}
 }
 
@@ -242,10 +242,10 @@ func loadFixTable(panel *gowd.Element) {
 	header.AddElement(gowd.NewElement("th")).SetText("Error")
 	for _, reg := range table {
 		row := t.AddElement(gowd.NewElement("tr"))
-		row.AddElement(gowd.NewElement("th")).SetText(fmt.Sprintf("%d", reg.It))
-		row.AddElement(gowd.NewElement("th")).SetText(fmt.Sprintf("%g", reg.Xm))
-		row.AddElement(gowd.NewElement("th")).SetText(fmt.Sprintf("%g", reg.Fxm))
-		row.AddElement(gowd.NewElement("th")).SetText(fmt.Sprintf("%g", reg.Error))
+		row.AddElement(gowd.NewElement("td")).SetText(fmt.Sprintf("%d", reg.It))
+		row.AddElement(gowd.NewElement("td")).SetText(fmt.Sprintf("%g", reg.Xm))
+		row.AddElement(gowd.NewElement("td")).SetText(fmt.Sprintf("%g", reg.Fxm))
+		row.AddElement(gowd.NewElement("td")).SetText(fmt.Sprintf("%g", reg.Error))
 	}
 }
 
@@ -259,10 +259,10 @@ func loadSecTable(panel *gowd.Element) {
 	header.AddElement(gowd.NewElement("th")).SetText("Error")
 	for _, reg := range table {
 		row := t.AddElement(gowd.NewElement("tr"))
-		row.AddElement(gowd.NewElement("th")).SetText(fmt.Sprintf("%d", reg.It))
-		row.AddElement(gowd.NewElement("th")).SetText(fmt.Sprintf("%g", reg.Xm))
-		row.AddElement(gowd.NewElement("th")).SetText(fmt.Sprintf("%g", reg.Fxm))
-		row.AddElement(gowd.NewElement("th")).SetText(fmt.Sprintf("%g", reg.Error))
+		row.AddElement(gowd.NewElement("td")).SetText(fmt.Sprintf("%d", reg.It))
+		row.AddElement(gowd.NewElement("td")).SetText(fmt.Sprintf("%g", reg.Xm))
+		row.AddElement(gowd.NewElement("td")).SetText(fmt.Sprintf("%g", reg.Fxm))
+		row.AddElement(gowd.NewElement("td")).SetText(fmt.Sprintf("%g", reg.Error))
 	}
 }
 
@@ -278,12 +278,12 @@ func loadMulTable(panel *gowd.Element) {
 	header.AddElement(gowd.NewElement("th")).SetText("Error")
 	for _, reg := range table {
 		row := t.AddElement(gowd.NewElement("tr"))
-		row.AddElement(gowd.NewElement("th")).SetText(fmt.Sprintf("%d", reg.It))
-		row.AddElement(gowd.NewElement("th")).SetText(fmt.Sprintf("%g", reg.Xm))
-		row.AddElement(gowd.NewElement("th")).SetText(fmt.Sprintf("%g", reg.Fxm))
-		row.AddElement(gowd.NewElement("th")).SetText(fmt.Sprintf("%g", reg.Dfxm))
-		row.AddElement(gowd.NewElement("th")).SetText(fmt.Sprintf("%g", reg.D2fxm))
-		row.AddElement(gowd.NewElement("th")).SetText(fmt.Sprintf("%g", reg.Error))
+		row.AddElement(gowd.NewElement("td")).SetText(fmt.Sprintf("%d", reg.It))
+		row.AddElement(gowd.NewElement("td")).SetText(fmt.Sprintf("%g", reg.Xm))
+		row.AddElement(gowd.NewElement("td")).SetText(fmt.Sprintf("%g", reg.Fxm))
+		row.AddElement(gowd.NewElement("td")).SetText(fmt.Sprintf("%g", reg.Dfxm))
+		row.AddElement(gowd.NewElement("td")).SetText(fmt.Sprintf("%g", reg.D2fxm))
+		row.AddElement(gowd.NewElement("td")).SetText(fmt.Sprintf("%g", reg.Error))
 	}
 }
 
@@ -298,10 +298,10 @@ func loadNewTable(panel *gowd.Element) {
 	header.AddElement(gowd.NewElement("th")).SetText("Error")
 	for _, reg := range table {
 		row := t.AddElement(gowd.NewElement("tr"))
-		row.AddElement(gowd.NewElement("th")).SetText(fmt.Sprintf("%d", reg.It))
-		row.AddElement(gowd.NewElement("th")).SetText(fmt.Sprintf("%g", reg.Xm))
-		row.AddElement(gowd.NewElement("th")).SetText(fmt.Sprintf("%g", reg.Fxm))
-		row.AddElement(gowd.NewElement("th")).SetText(fmt.Sprintf("%g", reg.Dfxm))
-		row.AddElement(gowd.NewElement("th")).SetText(fmt.Sprintf("%g", reg.Error))
+		row.AddElement(gowd.NewElement("td")).SetText(fmt.Sprintf("%d", reg.It))
+		row.AddElement(gowd.NewElement("td")).SetText(fmt.Sprintf("%g", reg.Xm))
+		row.AddElement(gowd.NewElement("td")).SetText(fmt.Sprintf("%g", reg.Fxm))
+		row.AddElement(gowd.NewElement("td")).SetText(fmt.Sprintf("%g", reg.Dfxm))
+		row.AddElement(gowd.NewElement("td")).SetText(fmt.Sprintf("%g", reg.Error))
 	}
 }

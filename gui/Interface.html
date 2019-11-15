@@ -16,60 +16,85 @@
         </select>
     </div>
     <div id="single_problem_panel">
-    <div class="problem_tab" id="which">
-        <p>What's your problem?</p>
-        <label for="single_problem_def">f(x) = </label>
-        <input class="single_problem_def" placeholder="Enter your problem here" id="single_problem_def">
-    </div>
-    <div class="problem_tab" id="how">
-        <label for="single_method_selector">How do you want to solve your problem?</label><select id="single_method_selector">
-            <option value="none" selected="selected">----Select an option----</option>
-            <option value="search">Incremental Search</option>
-            <option value="bisection">Bisection</option>
-            <option value="false_pos">False Position (Regula falsi)</option>
-            <option value="fixed_point">Fixed Point</option>
-            <option value="newton">Newton</option>
-            <option value="secant">Secant</option>
-            <option value="multi">Multiple Roots</option>
-        </select>
-        <div id="gin"><label>g(x) = <input class="g_input" placeholder="?" id="g"></label></div>
-        <div id="dfin"><label for="df">f'(x) = </label><input class="df_input" placeholder="?" id="df"></div>
-        <div id="d2fin"><label for="d2f">f''(x) = </label><input class="d2f_input" placeholder="?" id="d2f"></div>
-    </div>
-    <div class="single_problem_tab" id="single_data">
-        <div id="x1in"><label>First X value
-                <input type="number" id="x1">
-            </label></div>
+        <div class="problem_tab" id="which">
+            <p>What's your problem?</p>
+            <label for="single_problem_def">f(x) = </label>
+            <input class="single_problem_def" placeholder="Enter your problem here" id="single_problem_def">
+        </div>
+        <div class="problem_tab" id="how">
+            <label for="single_method_selector">How do you want to solve your problem?</label><select id="single_method_selector">
+                <option value="none" selected="selected">----Select an option----</option>
+                <option value="search">Incremental Search</option>
+                <option value="bisection">Bisection</option>
+                <option value="false_pos">False Position (Regula falsi)</option>
+                <option value="fixed_point">Fixed Point</option>
+                <option value="newton">Newton</option>
+                <option value="secant">Secant</option>
+                <option value="multi">Multiple Roots</option>
+            </select>
+            <div id="gin"><label>g(x) = <input class="g_input" placeholder="?" id="g"></label></div>
+            <div id="dfin"><label for="df">f'(x) = </label><input class="df_input" placeholder="?" id="df"></div>
+            <div id="d2fin"><label for="d2f">f''(x) = </label><input class="d2f_input" placeholder="?" id="d2f"></div>
+        </div>
+        <div class="single_problem_tab" id="single_data">
+            <div id="x1in"><label>First X value
+                    <input type="number" id="x1">
+             </label></div>
 
-        <div id="x2in"><label>Second X value
-                <input type="number" id="x2">
+            <div id="x2in"><label>Second X value
+                    <input type="number" id="x2">
             </label></div>
-
-        <div id="dxin"><label>Delta
+            <div id="dxin"><label>Delta
                 <input type="number" id="dx">
             </label></div>
-
-        <div id="tolin"><label>Tolerance
+            <div id="tolin"><label>Tolerance
                 <input type="number" min="0" id="tol">
             </label></div>
 
-        <div id="itin"><label>Max. Iterations
+            <div id="itin"><label>Max. Iterations
                 <input type="number" min="1" step="1" id="it">
             </label></div>
-        <div id="absolute">
-            <label for="abs">Absolute Error</label><input type="radio" name="error" value="absolute" id="abs" checked>
+            <div id="absolute">
+                <label for="abs">Absolute Error</label><input type="radio" name="error" value="absolute" id="abs" checked>
+            </div>
+            <div id="relative">
+                <label for="rel">Relative Error</label><input type="radio" name="error" value="relative" id="rel">
+            </div>
         </div>
-        <div id="relative">
-            <label for="rel">Relative Error</label><input type="radio" name="error" value="relative" id="rel">
-        </div>
-
-        <input type="button" id="submit_button" value="Solve">
-
-    </div>
     </div>
     <div id="system_problem_panel">
+        <div id="nvarsin"><label>How many variables? <input type="number" min="2" step="1" id="n_vars"></label></div>
+        <div id="matrix_in">
+            <input type="button" id="A_button" value="Enter the coefficient matrix">
+            <input type="button" id="B_button" value="Enter the independent terms vector">
+        </div>
+        <div id="matrix_modal">
+
+        </div>
+        <div id="vector_modal">
+
+        </div>
+        <div class="problem_tab" id="se_methods">
+            <label for="system_method_selector">How do you want to solve your problem?</label><select id="system_method_selector">
+                <option value="none" selected="selected">----Select an option----</option>
+                <option value="gauss">Gaussian Elimination</option>
+                <option value="ppivoting">Gaussian Elimination w/ partial pivoting</option>
+                <option value="tpivoting">Gaussian Elimination w/ total pivoting</option>
+                <option value="doolittle">Doolittle Factorization</option>
+                <option value="croud">Croud Factorization</option>
+                <option value="cholesky">Cholesky Factorization</option>
+                <option value="jacobi">Jacobi Relaxed</option>
+                <option value="gauss_seidel">Gauss-Seidel Relaxed</option>
+            </select>
+
+        </div>
+
 
     </div>
+    <div id="interpolation_problem_panel">
+
+    </div>
+    <input type="button" id="submit_button" value="Solve">
 </div>
 <div class="solution_panel" id="solution_panel">
     <h2>Solution</h2>
