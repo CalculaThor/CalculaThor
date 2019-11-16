@@ -20,11 +20,13 @@ func beginSystemProblem() {
 
 	em["A_button"].OnEvent("onclick", enterMatrix)
 	em["B_button"].OnEvent("onclick", enterVector)
+	em["xi_button"].OnEvent("onclick", initialXEntry)
 
 	em["system_method_selector"].OnEvent("onchange", checkSEMethods)
 }
 
 func setN(sender *gowd.Element, event *gowd.EventElement) {
+	em["submit_button"].Hide()
 	n, err := strconv.Atoi(sender.GetValue())
 	if err == nil {
 		if n < 2 {
@@ -49,6 +51,7 @@ func enterMatrix(sender *gowd.Element, event *gowd.EventElement) {
 			in.SetAttribute("type", "number")
 			id = fmt.Sprintf("A%d_%d", i, j)
 			in.SetID(id)
+			in.SetAttribute("placeholder", fmt.Sprintf("A%d-%d", i, j))
 			em[id] = in
 			elm = gowd.NewElement("td")
 			elm.AddElement(in)
@@ -87,6 +90,7 @@ func enterVector(sender *gowd.Element, event *gowd.EventElement) {
 		in.SetAttribute("type", "number")
 		id = fmt.Sprintf("B%d", i)
 		in.SetID(id)
+		in.SetAttribute("placeholder", fmt.Sprintf("B%d", i))
 		em[id] = in
 		elm = gowd.NewElement("td")
 		elm.AddElement(in)
@@ -124,6 +128,8 @@ func checkMatrix(sender *gowd.Element, event *gowd.EventElement) {
 	aDone = true
 	if bDone && aDone {
 		em["se_methods"].Show()
+	} else {
+		em["solution_panel"].Hide()
 	}
 	em["matrix_modal"].Hide()
 }
@@ -139,6 +145,8 @@ func checkVector(sender *gowd.Element, event *gowd.EventElement) {
 	bDone = true
 	if bDone && aDone {
 		em["se_methods"].Show()
+	} else {
+		em["solution_panel"].Hide()
 	}
 	em["vector_modal"].Hide()
 }
@@ -162,11 +170,13 @@ func generateVector(sender *gowd.Element, event *gowd.EventElement) {
 }
 
 func checkSEMethods(sender *gowd.Element, event *gowd.EventElement) {
+	em["solution_panel"].Hide()
 	em["submit_button"].Show()
 	switch sender.GetValue() {
 	case "none":
 		em["system_data"].Hide()
 		em["submit_button"].Hide()
+		em["xi_button"].Hide()
 	case "gauss", "ppivoting", "tpivoting", "doolittle", "croud", "cholesky":
 		em["system_data"].Show()
 		em["SE_tolin"].Hide()
@@ -177,6 +187,7 @@ func checkSEMethods(sender *gowd.Element, event *gowd.EventElement) {
 		em["SE_relative"].Hide()
 		em["infinity"].Hide()
 		em["euclidean"].Hide()
+		em["xi_button"].Hide()
 	case "jacobi":
 		em["system_data"].Show()
 		em["SE_tolin"].Show()
@@ -187,6 +198,8 @@ func checkSEMethods(sender *gowd.Element, event *gowd.EventElement) {
 		em["SE_relative"].Show()
 		em["infinity"].Show()
 		em["euclidean"].Show()
+		em["xi_button"].Show()
+		em["submit_button"].Hide()
 	case "gauss_seidel":
 		em["system_data"].Show()
 		em["SE_tolin"].Show()
@@ -197,7 +210,68 @@ func checkSEMethods(sender *gowd.Element, event *gowd.EventElement) {
 		em["SE_relative"].Show()
 		em["infinity"].Show()
 		em["euclidean"].Show()
+		em["xi_button"].Show()
+		em["submit_button"].Hide()
 	default:
 		em["system_data"].Hide()
+		em["submit_button"].Hide()
 	}
+}
+
+func initialXEntry(sender *gowd.Element, event *gowd.EventElement) {
+	mod := em["initial_values"]
+	mod.Show()
+	mod.RemoveElements()
+	table := gowd.NewElement("table")
+	var row, in, elm *gowd.Element
+	var id string
+	for i := 0; i < numberOfVars; i++ {
+		row = gowd.NewElement("tr")
+		in = gowd.NewElement("input")
+		in.SetAttribute("type", "number")
+		id = fmt.Sprintf("Xi%d", i)
+		in.SetID(id)
+		in.SetAttribute("placeholder", fmt.Sprintf("Xi-%d", i))
+		em[id] = in
+		elm = gowd.NewElement("td")
+		elm.AddElement(in)
+		row.AddElement(elm)
+		table.AddElement(row)
+	}
+	mod.AddElement(table)
+
+	ok := gowd.NewElement("input")
+	ok.SetAttribute("type", "button")
+	ok.SetID("matrix_ok")
+	ok.SetValue("Ok")
+	ok.OnEvent("onclick", checkValues)
+
+	random := gowd.NewElement("input")
+	random.SetAttribute("type", "button")
+	random.SetID("matrix_random")
+	random.SetValue("Generate random numbers")
+	random.OnEvent("onclick", generateValues)
+
+	mod.AddElement(ok)
+	mod.AddElement(random)
+}
+
+func generateValues(sender *gowd.Element, event *gowd.EventElement) {
+	var n float64
+	for i := 0; i < numberOfVars; i++ {
+		n = rand.Float64()*200 - 100
+		em[fmt.Sprintf("Xi%d", i)].SetValue(fmt.Sprintf("%g", n))
+	}
+}
+
+func checkValues(sender *gowd.Element, event *gowd.EventElement) {
+	for i := 0; i < numberOfVars; i++ {
+		if em[fmt.Sprintf("Xi%d", i)].GetValue() == "" {
+			em["initial_values"].Hide()
+			em["submit_button"].Hide()
+			return
+		}
+	}
+	em["submit_button"].Show()
+	em["initial_values"].Hide()
 }

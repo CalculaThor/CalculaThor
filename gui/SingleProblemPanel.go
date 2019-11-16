@@ -39,11 +39,11 @@ func (p *ProblemPanel) beginProblem() {
 	em["df"].OnEvent("onchange", p.dfEntry)
 	em["d2f"].OnEvent("onchange", p.d2fEntry)
 
-
-
 }
 
 func (p *ProblemPanel) openProblem(sender *gowd.Element, event *gowd.EventElement) {
+	em["submit_button"].Hide()
+	em["solution_panel"].Hide()
 	switch sender.GetValue() {
 	case "single":
 		p.problem.Show()
