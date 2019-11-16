@@ -83,12 +83,37 @@
                 <option value="doolittle">Doolittle Factorization</option>
                 <option value="croud">Croud Factorization</option>
                 <option value="cholesky">Cholesky Factorization</option>
-                <option value="jacobi">Jacobi Relaxed</option>
+                <option value="jacobi">Jacobi</option>
                 <option value="gauss_seidel">Gauss-Seidel Relaxed</option>
             </select>
-
         </div>
-
+        <div id="system_data">
+            <div id="SE_tolin"><label>Tolerance
+                    <input type="number" min="0" id="SE_tol">
+                </label>
+            </div>
+            <div id="SE_itin"><label>Max. Iterations
+                    <input type="number" min="1" step="1" id="SE_it">
+                </label>
+            </div>
+            <div id="w_in"><label>w
+                    <input type="number" step=any id="w">
+                </label>
+            </div>
+            <div id="initial_values"></div>
+            <div id="SE_absolute">
+                <label for="SE_abs">Absolute Error</label><input type="radio" name="SE_error" value="absolute" id="SE_abs" checked>
+            </div>
+            <div id="SE_relative">
+                <label for="SE_rel">Relative Error</label><input type="radio" name="SE_error" value="relative" id="SE_rel">
+            </div>
+            <div id="infinity">
+                <label for="infinity_norm">Infinity Norm</label><input type="radio" name="norm" value="infinity" id="infinity_norm" checked>
+            </div>
+            <div id="euclidean">
+                <label for="euclidean_norm">Euclidean Norm</label><input type="radio" name="norm" value="euclidean" id="euclidean_norm">
+            </div>
+        </div>
 
     </div>
     <div id="interpolation_problem_panel">

@@ -308,7 +308,7 @@ func CholeskyFactorization() *mat.VecDense {
 
 }
 
-func JacobiRelaxed(x []float64, w, tol float64, maxIt uint) ([]float64, uint, bool) {
+func Jacobi(x []float64, tol float64, maxIt uint) ([]float64, uint, bool) {
 	jacTable = make([]Reg4, 0, maxIt)
 	x0 := make([]float64, n)
 	x0cop := make([]float64, n)

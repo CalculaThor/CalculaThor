@@ -14,11 +14,14 @@ func beginSystemProblem() {
 	em["nvarsin"].Show()
 	em["matrix_in"].Hide()
 	em["se_methods"].Hide()
+	em["system_data"].Hide()
 
 	em["n_vars"].OnEvent("onchange", setN)
 
 	em["A_button"].OnEvent("onclick", enterMatrix)
 	em["B_button"].OnEvent("onclick", enterVector)
+
+	em["system_method_selector"].OnEvent("onchange", checkSEMethods)
 }
 
 func setN(sender *gowd.Element, event *gowd.EventElement) {
@@ -34,6 +37,7 @@ func setN(sender *gowd.Element, event *gowd.EventElement) {
 
 func enterMatrix(sender *gowd.Element, event *gowd.EventElement) {
 	mod := em["matrix_modal"]
+	mod.Show()
 	mod.RemoveElements()
 	table := gowd.NewElement("table")
 	var row, in, elm *gowd.Element
@@ -72,6 +76,7 @@ func enterMatrix(sender *gowd.Element, event *gowd.EventElement) {
 
 func enterVector(sender *gowd.Element, event *gowd.EventElement) {
 	mod := em["vector_modal"]
+	mod.Show()
 	mod.RemoveElements()
 	table := gowd.NewElement("table")
 	var row, in, elm *gowd.Element
@@ -96,7 +101,6 @@ func enterVector(sender *gowd.Element, event *gowd.EventElement) {
 	ok.SetValue("Ok")
 	ok.OnEvent("onclick", checkVector)
 
-
 	random := gowd.NewElement("input")
 	random.SetAttribute("type", "button")
 	random.SetID("matrix_random")
@@ -112,34 +116,38 @@ func checkMatrix(sender *gowd.Element, event *gowd.EventElement) {
 		for j := 0; j < numberOfVars; j++ {
 			if em[fmt.Sprintf("A%d_%d", i, j)].GetValue() == "" {
 				aDone = false
+				em["matrix_modal"].Hide()
 				return
 			}
 		}
 	}
 	aDone = true
-	if bDone && aDone{
+	if bDone && aDone {
 		em["se_methods"].Show()
 	}
+	em["matrix_modal"].Hide()
 }
 
 func checkVector(sender *gowd.Element, event *gowd.EventElement) {
 	for i := 0; i < numberOfVars; i++ {
 		if em[fmt.Sprintf("B%d", i)].GetValue() == "" {
 			bDone = false
+			em["vector_modal"].Hide()
 			return
 		}
 	}
 	bDone = true
-	if bDone && aDone{
+	if bDone && aDone {
 		em["se_methods"].Show()
 	}
+	em["vector_modal"].Hide()
 }
 
 func generateMatrix(sender *gowd.Element, event *gowd.EventElement) {
 	var n float64
 	for i := 0; i < numberOfVars; i++ {
 		for j := 0; j < numberOfVars; j++ {
-			n = rand.Float64() * 200 - 100
+			n = rand.Float64()*200 - 100
 			em[fmt.Sprintf("A%d_%d", i, j)].SetValue(fmt.Sprintf("%g", n))
 		}
 	}
@@ -148,7 +156,48 @@ func generateMatrix(sender *gowd.Element, event *gowd.EventElement) {
 func generateVector(sender *gowd.Element, event *gowd.EventElement) {
 	var n float64
 	for i := 0; i < numberOfVars; i++ {
-		n = rand.Float64() * 200 - 100
+		n = rand.Float64()*200 - 100
 		em[fmt.Sprintf("B%d", i)].SetValue(fmt.Sprintf("%g", n))
+	}
+}
+
+func checkSEMethods(sender *gowd.Element, event *gowd.EventElement) {
+	em["submit_button"].Show()
+	switch sender.GetValue() {
+	case "none":
+		em["system_data"].Hide()
+		em["submit_button"].Hide()
+	case "gauss", "ppivoting", "tpivoting", "doolittle", "croud", "cholesky":
+		em["system_data"].Show()
+		em["SE_tolin"].Hide()
+		em["SE_itin"].Hide()
+		em["initial_values"].Hide()
+		em["w_in"].Hide()
+		em["SE_absolute"].Hide()
+		em["SE_relative"].Hide()
+		em["infinity"].Hide()
+		em["euclidean"].Hide()
+	case "jacobi":
+		em["system_data"].Show()
+		em["SE_tolin"].Show()
+		em["SE_itin"].Show()
+		em["w_in"].Hide()
+		em["initial_values"].Show()
+		em["SE_absolute"].Show()
+		em["SE_relative"].Show()
+		em["infinity"].Show()
+		em["euclidean"].Show()
+	case "gauss_seidel":
+		em["system_data"].Show()
+		em["SE_tolin"].Show()
+		em["SE_itin"].Show()
+		em["w_in"].Show()
+		em["initial_values"].Show()
+		em["SE_absolute"].Show()
+		em["SE_relative"].Show()
+		em["infinity"].Show()
+		em["euclidean"].Show()
+	default:
+		em["system_data"].Hide()
 	}
 }
