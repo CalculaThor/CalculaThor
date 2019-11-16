@@ -38,6 +38,7 @@ func setN(sender *gowd.Element, event *gowd.EventElement) {
 }
 
 func enterMatrix(sender *gowd.Element, event *gowd.EventElement) {
+	em["se_methods"].Hide()
 	mod := em["matrix_modal"]
 	mod.Show()
 	mod.RemoveElements()
@@ -51,7 +52,7 @@ func enterMatrix(sender *gowd.Element, event *gowd.EventElement) {
 			in.SetAttribute("type", "number")
 			id = fmt.Sprintf("A%d_%d", i, j)
 			in.SetID(id)
-			in.SetAttribute("placeholder", fmt.Sprintf("A%d-%d", i, j))
+			in.SetAttribute("placeholder", fmt.Sprintf("A%d-%d", i+1, j+1))
 			em[id] = in
 			elm = gowd.NewElement("td")
 			elm.AddElement(in)
@@ -78,6 +79,7 @@ func enterMatrix(sender *gowd.Element, event *gowd.EventElement) {
 }
 
 func enterVector(sender *gowd.Element, event *gowd.EventElement) {
+	em["se_methods"].Hide()
 	mod := em["vector_modal"]
 	mod.Show()
 	mod.RemoveElements()
@@ -90,7 +92,7 @@ func enterVector(sender *gowd.Element, event *gowd.EventElement) {
 		in.SetAttribute("type", "number")
 		id = fmt.Sprintf("B%d", i)
 		in.SetID(id)
-		in.SetAttribute("placeholder", fmt.Sprintf("B%d", i))
+		in.SetAttribute("placeholder", fmt.Sprintf("B%d", i+1))
 		em[id] = in
 		elm = gowd.NewElement("td")
 		elm.AddElement(in)
@@ -116,6 +118,7 @@ func enterVector(sender *gowd.Element, event *gowd.EventElement) {
 }
 
 func checkMatrix(sender *gowd.Element, event *gowd.EventElement) {
+	em["se_methods"].Hide()
 	for i := 0; i < numberOfVars; i++ {
 		for j := 0; j < numberOfVars; j++ {
 			if em[fmt.Sprintf("A%d_%d", i, j)].GetValue() == "" {
@@ -135,6 +138,7 @@ func checkMatrix(sender *gowd.Element, event *gowd.EventElement) {
 }
 
 func checkVector(sender *gowd.Element, event *gowd.EventElement) {
+	em["se_methods"].Hide()
 	for i := 0; i < numberOfVars; i++ {
 		if em[fmt.Sprintf("B%d", i)].GetValue() == "" {
 			bDone = false
@@ -231,7 +235,7 @@ func initialXEntry(sender *gowd.Element, event *gowd.EventElement) {
 		in.SetAttribute("type", "number")
 		id = fmt.Sprintf("Xi%d", i)
 		in.SetID(id)
-		in.SetAttribute("placeholder", fmt.Sprintf("Xi-%d", i))
+		in.SetAttribute("placeholder", fmt.Sprintf("Xi-%d", i+1))
 		em[id] = in
 		elm = gowd.NewElement("td")
 		elm.AddElement(in)
