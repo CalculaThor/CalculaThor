@@ -27,6 +27,10 @@ func beginSystemProblem() {
 
 func setN(sender *gowd.Element, event *gowd.EventElement) {
 	em["submit_button"].Hide()
+	em["solution_panel"].Hide()
+	em["se_methods"].Hide()
+	aDone = false
+	bDone = false
 	n, err := strconv.Atoi(sender.GetValue())
 	if err == nil {
 		if n < 2 {
@@ -79,6 +83,7 @@ func enterMatrix(sender *gowd.Element, event *gowd.EventElement) {
 }
 
 func enterVector(sender *gowd.Element, event *gowd.EventElement) {
+	em["solution_panel"].Hide()
 	em["se_methods"].Hide()
 	mod := em["vector_modal"]
 	mod.Show()

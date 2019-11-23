@@ -357,7 +357,8 @@ func GaussSeidelRelaxed(x []float64, w, tol float64, maxIt uint) ([]float64, uin
 	seidTable = append(seidTable, Reg4{x0cop, math.Inf(1), 0})
 	var x1 []float64
 	for disp > tol && count < maxIt {
-		x1 = newGaussSet(x0)
+		x1 = newGaussSet(x0, w)
+		x0cop = make([]float64, n)
 		copy(x0cop, x1)
 		disp = norm(x1, x0)
 		seidTable = append(seidTable, Reg4{x0cop, disp, int(count)})
@@ -371,18 +372,24 @@ func GaussSeidelRelaxed(x []float64, w, tol float64, maxIt uint) ([]float64, uin
 	return x1, count, false
 }
 
-func newGaussSet(xl []float64) []float64 {
+func newGaussSet(xl []float64, w float64) []float64 {
 	xn := make([]float64, n)
 	for i := 0; i < n; i++ {
-		sum := float64(0)
-		for j := 0; j < i-1; j++ {
-			sum += coeff.At(i, j) * xn[j]
+		sum1, sum2 := float64(0), float64(0)
+		for j := 0; j < i; j++ {
+			sum2 += coeff.At(i, j) * xn[j]
 		}
 		for j := i + 1; j < n; j++ {
-			sum += coeff.At(i, j) * xl[j]
+			sum1 += coeff.At(i, j) * xl[j]
 		}
-		xn[i] = (terms.AtVec(i) - sum) / coeff.At(i, i)
+		if coeff.At(i, i) == 0 {
+			badIn = true
+		}
+		sum := sum1 + sum2
+		xn[i] = (1-w)*xl[i] - w*(sum+terms.AtVec(i))/coeff.At(i, i)
+		//xn[i] = (terms.AtVec(i) - sum) / coeff.At(i, i)
 	}
+
 	return xn
 }
 
