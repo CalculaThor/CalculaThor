@@ -7,7 +7,7 @@ import (
 )
 
 type Index struct {
-	i, j int
+	I, J int
 }
 
 type Reg1 struct {
@@ -387,7 +387,7 @@ func newGaussSet(xl []float64, w float64) []float64 {
 		}
 		sum := sum1 + sum2
 		xn[i] = (1-w)*xl[i] - w*(sum+terms.AtVec(i))/coeff.At(i, i)
-		//xn[i] = (terms.AtVec(i) - sum) / coeff.At(i, i)
+		//xn[I] = (terms.AtVec(I) - sum) / coeff.At(I, I)
 	}
 
 	return xn
@@ -438,4 +438,40 @@ func SetInfinity() {
 
 func SetEuclidean() {
 	euclidean = true
+}
+
+func GetGaussSimpleStages() []Reg1 {
+	return gSimStages
+}
+
+func GetGaussPartialStages() []Reg1 {
+	return gParStages
+}
+
+func GetGaussTotalStages() []Reg2 {
+	return gTotStages
+}
+
+func GetDoolittleStages() []Reg3 {
+	return dooStages
+}
+
+func GetCroutStages() []Reg3 {
+	return croutStages
+}
+
+func GetCholeskyStages() []Reg3 {
+	return cholStages
+}
+
+func GetJacobiTable() []Reg4 {
+	return jacTable
+}
+
+func GetGaussSeidelTable() []Reg4 {
+	return seidTable
+}
+
+func BadIn() bool {
+	return badIn
 }

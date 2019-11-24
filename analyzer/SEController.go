@@ -21,6 +21,7 @@ func solveSystemOfEquations() {
 	case "gauss":
 		ans := seanalyzer.Gauss()
 		showResults(ans)
+		showStages1(seanalyzer.GetGaussSimpleStages())
 	case "ppivoting":
 		ans := seanalyzer.GaussPartialPivoting()
 		showResults(ans)
@@ -191,4 +192,31 @@ func showResultsSlice(ans []float64) {
 
 	table.AddElement(values)
 	em["solution_panel"].AddElement(table)
+}
+
+func showStages1(stages []seanalyzer.Reg1) {
+	stagesDiv := gowd.NewElement("div")
+	titl := gowd.NewElement("h3")
+	titl.SetText("Stages")
+	for i, stage := range stages {
+		div := gowd.NewElement("div")
+		tit := gowd.NewElement("h3")
+		tit.SetText("Stage " + strconv.Itoa(i))
+		div.AddElement(tit)
+		matr := gowd.NewElement("table")
+		r, c := stage.Mat.Caps()
+		for x := 0; x < r; x++ {
+			row := gowd.NewElement("tr")
+			for y := 0; y < c; y++ {
+				el := gowd.NewElement("td")
+				el.SetText(fmt.Sprintf("%g", stage.Mat.At(x, y)))
+				row.AddElement(el)
+			}
+			matr.AddElement(row)
+		}
+
+		stagesDiv.AddElement(div)
+	}
+	em["solution_panel"].AddElement(stagesDiv)
+
 }
