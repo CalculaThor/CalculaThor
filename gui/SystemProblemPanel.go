@@ -29,6 +29,7 @@ func setN(sender *gowd.Element, event *gowd.EventElement) {
 	em["submit_button"].Hide()
 	em["solution_panel"].Hide()
 	em["se_methods"].Hide()
+	em["system_data"].Hide()
 	aDone = false
 	bDone = false
 	n, err := strconv.Atoi(sender.GetValue())
