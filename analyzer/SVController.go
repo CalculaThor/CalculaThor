@@ -14,6 +14,7 @@ func solveSingleEquation() {
 	if err != nil {
 		return
 	}
+
 	panel := em["solution_panel"]
 	panel.RemoveElements()
 	panel.Show()
@@ -28,10 +29,10 @@ func solveSingleEquation() {
 			panel.AddElement(gowd.NewElement("h2")).SetText("Not enough iterations.")
 			loadBisTable(panel)
 		} else if ans.IsRoot {
-			panel.AddElement(gowd.NewElement("h2")).SetText("The point x = " + strconv.FormatFloat(ans.Root, 'E', 3, 64) + " is a root.")
+			panel.AddElement(gowd.NewElement("h2")).SetText("The point x = " + strconv.FormatFloat(ans.Root, 'g', 3, 64) + " is a root.")
 			loadBisTable(panel)
 		} else if ans.IsAlmostRoot {
-			panel.AddElement(gowd.NewElement("h2")).SetText("The point x = " + strconv.FormatFloat(ans.Root, 'E', 3, 64) + " is almost a root.")
+			panel.AddElement(gowd.NewElement("h2")).SetText("The point x = " + strconv.FormatFloat(ans.Root, 'g', 3, 64) + " is almost a root.")
 			loadBisTable(panel)
 		} else if ans.BadIn {
 			panel.AddElement(gowd.NewElement("h2")).SetText("Bad In.")
@@ -47,10 +48,10 @@ func solveSingleEquation() {
 			panel.AddElement(gowd.NewElement("h2")).SetText("Not enough iterations.")
 			loadFalTable(panel)
 		} else if ans.IsRoot {
-			panel.AddElement(gowd.NewElement("h2")).SetText("The point x = " + strconv.FormatFloat(ans.Root, 'E', 3, 64) + " is a root.")
+			panel.AddElement(gowd.NewElement("h2")).SetText("The point x = " + strconv.FormatFloat(ans.Root, 'g', 3, 64) + " is a root.")
 			loadFalTable(panel)
 		} else if ans.IsAlmostRoot {
-			panel.AddElement(gowd.NewElement("h2")).SetText("The point x = " + strconv.FormatFloat(ans.Root, 'E', 3, 64) + " is almost a root.")
+			panel.AddElement(gowd.NewElement("h2")).SetText("The point x = " + strconv.FormatFloat(ans.Root, 'g', 3, 64) + " is almost a root.")
 			loadFalTable(panel)
 		} else if ans.BadIn {
 			panel.AddElement(gowd.NewElement("h2")).SetText("Bad In.")
@@ -65,10 +66,10 @@ func solveSingleEquation() {
 			panel.AddElement(gowd.NewElement("h2")).SetText("Not enough iterations.")
 			loadSecTable(panel)
 		} else if ans.IsRoot {
-			panel.AddElement(gowd.NewElement("h2")).SetText("The point x = " + strconv.FormatFloat(ans.Root, 'E', 3, 64) + " is a root.")
+			panel.AddElement(gowd.NewElement("h2")).SetText("The point x = " + strconv.FormatFloat(ans.Root, 'g', 3, 64) + " is a root.")
 			loadSecTable(panel)
 		} else if ans.IsAlmostRoot {
-			panel.AddElement(gowd.NewElement("h2")).SetText("The point x = " + strconv.FormatFloat(ans.Root, 'E', 3, 64) + " is almost a root.")
+			panel.AddElement(gowd.NewElement("h2")).SetText("The point x = " + strconv.FormatFloat(ans.Root, 'g', 3, 64) + " is almost a root.")
 			loadSecTable(panel)
 		} else if ans.BadIn {
 			panel.AddElement(gowd.NewElement("h2")).SetText("Bad In.")
@@ -82,9 +83,9 @@ func solveSingleEquation() {
 		if !ans.IsRange && !ans.IsRoot {
 			panel.AddElement(gowd.NewElement("h2")).SetText("Not enough iterations.")
 		} else if ans.IsRoot {
-			panel.AddElement(gowd.NewElement("h2")).SetText("The point x = " + strconv.FormatFloat(ans.Root, 'E', 3, 64) + " is a root.")
+			panel.AddElement(gowd.NewElement("h2")).SetText("The point x = " + strconv.FormatFloat(ans.Root, 'g', 3, 64) + " is a root.")
 		} else if ans.IsRange {
-			panel.AddElement(gowd.NewElement("h2")).SetText("There's a root between " + strconv.FormatFloat(ans.A, 'E', 3, 64) + " and " + strconv.FormatFloat(ans.B, 'E', 3, 64) + ".")
+			panel.AddElement(gowd.NewElement("h2")).SetText("There's a root between " + strconv.FormatFloat(ans.A, 'g', 3, 64) + " and " + strconv.FormatFloat(ans.B, 'E', 3, 64) + ".")
 		}
 	case "fixed_point":
 		x0, _ := strconv.ParseFloat(em["x1"].GetValue(), 64)
@@ -100,10 +101,10 @@ func solveSingleEquation() {
 			panel.AddElement(gowd.NewElement("h2")).SetText("Not enough iterations.")
 			loadFixTable(panel)
 		} else if ans.IsRoot {
-			panel.AddElement(gowd.NewElement("h2")).SetText("The point x = " + strconv.FormatFloat(ans.Root, 'E', 3, 64) + " is a root.")
+			panel.AddElement(gowd.NewElement("h2")).SetText("The point x = " + strconv.FormatFloat(ans.Root, 'g', 3, 64) + " is a root.")
 			loadFixTable(panel)
 		} else if ans.IsAlmostRoot {
-			panel.AddElement(gowd.NewElement("h2")).SetText("The point x = " + strconv.FormatFloat(ans.Root, 'E', 3, 64) + " is almost a root.")
+			panel.AddElement(gowd.NewElement("h2")).SetText("The point x = " + strconv.FormatFloat(ans.Root, 'g', 3, 64) + " is almost a root.")
 			loadFixTable(panel)
 		} else if ans.BadIn {
 			panel.AddElement(gowd.NewElement("h2")).SetText("Bad In.")
@@ -122,10 +123,10 @@ func solveSingleEquation() {
 			panel.AddElement(gowd.NewElement("h2")).SetText("Not enough iterations.")
 			loadNewTable(panel)
 		} else if ans.IsRoot {
-			panel.AddElement(gowd.NewElement("h2")).SetText("The point x = " + strconv.FormatFloat(ans.Root, 'E', 3, 64) + " is a root.")
+			panel.AddElement(gowd.NewElement("h2")).SetText("The point x = " + strconv.FormatFloat(ans.Root, 'g', 3, 64) + " is a root.")
 			loadNewTable(panel)
 		} else if ans.IsAlmostRoot {
-			panel.AddElement(gowd.NewElement("h2")).SetText("The point x = " + strconv.FormatFloat(ans.Root, 'E', 3, 64) + " is almost a root.")
+			panel.AddElement(gowd.NewElement("h2")).SetText("The point x = " + strconv.FormatFloat(ans.Root, 'g', 3, 64) + " is almost a root.")
 			loadNewTable(panel)
 		} else if ans.BadIn {
 			panel.AddElement(gowd.NewElement("h2")).SetText("Bad In.")
@@ -149,10 +150,10 @@ func solveSingleEquation() {
 			panel.AddElement(gowd.NewElement("h2")).SetText("Not enough iterations.")
 			loadMulTable(panel)
 		} else if ans.IsRoot {
-			panel.AddElement(gowd.NewElement("h2")).SetText("The point x = " + strconv.FormatFloat(ans.Root, 'E', 3, 64) + " is a root.")
+			panel.AddElement(gowd.NewElement("h2")).SetText("The point x = " + strconv.FormatFloat(ans.Root, 'g', 3, 64) + " is a root.")
 			loadMulTable(panel)
 		} else if ans.IsAlmostRoot {
-			panel.AddElement(gowd.NewElement("h2")).SetText("The point x = " + strconv.FormatFloat(ans.Root, 'E', 3, 64) + " is almost a root.")
+			panel.AddElement(gowd.NewElement("h2")).SetText("The point x = " + strconv.FormatFloat(ans.Root, 'g', 3, 64) + " is almost a root.")
 			loadMulTable(panel)
 		} else if ans.BadIn {
 			panel.AddElement(gowd.NewElement("h2")).SetText("Bad In.")
