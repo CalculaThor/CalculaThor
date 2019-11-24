@@ -30,6 +30,7 @@ func (p *ProblemPanel) beginProblem() {
 
 	em["single_problem_panel"].Hide()
 	em["system_problem_panel"].Hide()
+	em["solution_panel"].Hide()
 	em["interpolation_problem_panel"].Hide()
 
 	em["type_selector"].OnEvent("onchange", p.openProblem)

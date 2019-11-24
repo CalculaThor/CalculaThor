@@ -69,6 +69,7 @@ func GaussElimination() *mat.Dense {
 	gSimStages = make([]Reg1, 0, n)
 	Ab := mat.NewDense(n, n+1, nil)
 	Ab.Augment(coeff, terms)
+	gSimStages = append(gSimStages, Reg1{mat.DenseCopyOf(Ab), make(map[Index]float64, 0)})
 	for k := 0; k < n-1; k++ {
 		mults := make(map[Index]float64)
 		for i := k + 1; i < n; i++ {
@@ -130,6 +131,7 @@ func GaussEliminationPartialPivoting() *mat.Dense {
 	gParStages = make([]Reg1, 0, n)
 	Ab := mat.NewDense(n, n+1, nil)
 	Ab.Augment(coeff, terms)
+	gParStages = append(gParStages, Reg1{mat.DenseCopyOf(Ab), make(map[Index]float64, 0)})
 	for k := 0; k < n-1; k++ {
 		PartialPivoting(Ab, k)
 		mults := make(map[Index]float64)
@@ -184,10 +186,13 @@ func GaussEliminationTotalPivoting() (*mat.Dense, []int) {
 	for index := 0; index < n; index++ {
 		marks[index] = index
 	}
+	markscopy := make([]int, n)
+	copy(markscopy, marks)
+	gTotStages = append(gTotStages, Reg2{mat.DenseCopyOf(Ab), make(map[Index]float64, 0), markscopy})
 	for k := 0; k < n-1; k++ {
 		TotalPivoting(Ab, k, marks)
 		mults := make(map[Index]float64)
-		markscopy := make([]int, n)
+		markscopy = make([]int, n)
 		copy(markscopy, marks)
 		for i := k + 1; i < n; i++ {
 			mult := Ab.At(i, k) / Ab.At(k, k)
@@ -321,7 +326,7 @@ func Jacobi(x []float64, tol float64, maxIt uint) ([]float64, uint, bool) {
 		x1 = newJacobiSet(x0)
 		copy(x0cop, x1)
 		disp = norm(x1, x0)
-		jacTable = append(jacTable, Reg4{x0cop, disp, int(count)})
+		jacTable = append(jacTable, Reg4{x0cop, disp, int(count + 1)})
 		x0 = x1
 		count++
 	}
@@ -361,7 +366,7 @@ func GaussSeidelRelaxed(x []float64, w, tol float64, maxIt uint) ([]float64, uin
 		x0cop = make([]float64, n)
 		copy(x0cop, x1)
 		disp = norm(x1, x0)
-		seidTable = append(seidTable, Reg4{x0cop, disp, int(count)})
+		seidTable = append(seidTable, Reg4{x0cop, disp, int(count + 1)})
 		x0 = x1
 		count++
 	}

@@ -48,6 +48,7 @@ func enterMatrix(sender *gowd.Element, event *gowd.EventElement) {
 	mod.Show()
 	mod.RemoveElements()
 	table := gowd.NewElement("table")
+	table.SetClass("table table-sm table-bordered p-4 table-responsive")
 	var row, in, elm *gowd.Element
 	var id string
 	for i := 0; i < numberOfVars; i++ {
@@ -71,12 +72,14 @@ func enterMatrix(sender *gowd.Element, event *gowd.EventElement) {
 	ok.SetAttribute("type", "button")
 	ok.SetID("vector_ok")
 	ok.SetValue("Ok")
+	ok.SetClass("btn btn-secondary text-light")
 	ok.OnEvent("onclick", checkMatrix)
 
 	random := gowd.NewElement("input")
 	random.SetAttribute("type", "button")
 	random.SetID("vector_random")
 	random.SetValue("Generate random numbers")
+	random.SetClass("btn btn-secondary text-light")
 	random.OnEvent("onclick", generateMatrix)
 
 	mod.AddElement(ok)
@@ -90,6 +93,7 @@ func enterVector(sender *gowd.Element, event *gowd.EventElement) {
 	mod.Show()
 	mod.RemoveElements()
 	table := gowd.NewElement("table")
+	table.SetClass("table table-sm table-bordered p-4 table-responsive")
 	var row, in, elm *gowd.Element
 	var id string
 	for i := 0; i < numberOfVars; i++ {
@@ -111,12 +115,14 @@ func enterVector(sender *gowd.Element, event *gowd.EventElement) {
 	ok.SetAttribute("type", "button")
 	ok.SetID("matrix_ok")
 	ok.SetValue("Ok")
+	ok.SetClass("btn btn-secondary text-light")
 	ok.OnEvent("onclick", checkVector)
 
 	random := gowd.NewElement("input")
 	random.SetAttribute("type", "button")
 	random.SetID("matrix_random")
 	random.SetValue("Generate random numbers")
+	random.SetClass("btn btn-secondary text-light")
 	random.OnEvent("onclick", generateVector)
 
 	mod.AddElement(ok)
@@ -188,7 +194,7 @@ func checkSEMethods(sender *gowd.Element, event *gowd.EventElement) {
 		em["submit_button"].Hide()
 		em["xi_button"].Hide()
 	case "gauss", "ppivoting", "tpivoting", "doolittle", "croud", "cholesky":
-		em["system_data"].Show()
+		em["system_data"].Hide()
 		em["SE_tolin"].Hide()
 		em["SE_itin"].Hide()
 		em["initial_values"].Hide()
@@ -233,6 +239,7 @@ func initialXEntry(sender *gowd.Element, event *gowd.EventElement) {
 	mod.Show()
 	mod.RemoveElements()
 	table := gowd.NewElement("table")
+	table.SetClass("table table-sm table-bordered p-4 table-responsive")
 	var row, in, elm *gowd.Element
 	var id string
 	for i := 0; i < numberOfVars; i++ {
@@ -254,12 +261,14 @@ func initialXEntry(sender *gowd.Element, event *gowd.EventElement) {
 	ok.SetAttribute("type", "button")
 	ok.SetID("matrix_ok")
 	ok.SetValue("Ok")
+	ok.SetClass("btn btn-secondary text-light")
 	ok.OnEvent("onclick", checkValues)
 
 	random := gowd.NewElement("input")
 	random.SetAttribute("type", "button")
 	random.SetID("matrix_random")
 	random.SetValue("Generate random numbers")
+	random.SetClass("btn btn-secondary text-light")
 	random.OnEvent("onclick", generateValues)
 
 	mod.AddElement(ok)

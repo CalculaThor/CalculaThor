@@ -171,6 +171,7 @@ func setRel(sender *gowd.Element, event *gowd.EventElement) {
 func loadBisTable(panel *gowd.Element) {
 	table := svanalyzer.BisectionTable()
 	t := panel.AddElement(gowd.NewElement("table"))
+	t.SetClass("table table-sm table-bordered p-4 table-responsive")
 	header := t.AddElement(gowd.NewElement("tr"))
 	header.AddElement(gowd.NewElement("th")).SetText("n")
 	header.AddElement(gowd.NewElement("th")).SetText("xi")
@@ -192,6 +193,7 @@ func loadBisTable(panel *gowd.Element) {
 func loadFalTable(panel *gowd.Element) {
 	table := svanalyzer.FalsePosTable()
 	t := panel.AddElement(gowd.NewElement("table"))
+	t.SetClass("table table-sm table-bordered p-4 table-responsive")
 	header := t.AddElement(gowd.NewElement("tr"))
 	header.AddElement(gowd.NewElement("th")).SetText("n")
 	header.AddElement(gowd.NewElement("th")).SetText("xi")
@@ -213,6 +215,7 @@ func loadFalTable(panel *gowd.Element) {
 func loadFixTable(panel *gowd.Element) {
 	table := svanalyzer.FixedPointTable()
 	t := panel.AddElement(gowd.NewElement("table"))
+	t.SetClass("table table-sm table-bordered p-4 table-responsive")
 	header := t.AddElement(gowd.NewElement("tr"))
 	header.AddElement(gowd.NewElement("th")).SetText("n")
 	header.AddElement(gowd.NewElement("th")).SetText("xn")
@@ -230,6 +233,7 @@ func loadFixTable(panel *gowd.Element) {
 func loadSecTable(panel *gowd.Element) {
 	table := svanalyzer.SecantTable()
 	t := panel.AddElement(gowd.NewElement("table"))
+	t.SetClass("table table-sm table-bordered p-4 table-responsive")
 	header := t.AddElement(gowd.NewElement("tr"))
 	header.AddElement(gowd.NewElement("th")).SetText("n")
 	header.AddElement(gowd.NewElement("th")).SetText("xn")
@@ -247,6 +251,7 @@ func loadSecTable(panel *gowd.Element) {
 func loadMulTable(panel *gowd.Element) {
 	table := svanalyzer.MultipleRootTable()
 	t := panel.AddElement(gowd.NewElement("table"))
+	t.SetClass("table table-sm table-bordered p-4 table-responsive")
 	header := t.AddElement(gowd.NewElement("tr"))
 	header.AddElement(gowd.NewElement("th")).SetText("n")
 	header.AddElement(gowd.NewElement("th")).SetText("xn")
@@ -268,6 +273,7 @@ func loadMulTable(panel *gowd.Element) {
 func loadNewTable(panel *gowd.Element) {
 	table := svanalyzer.NewtonTable()
 	t := panel.AddElement(gowd.NewElement("table"))
+	t.SetClass("table table-sm table-bordered p-4 table-responsive")
 	header := t.AddElement(gowd.NewElement("tr"))
 	header.AddElement(gowd.NewElement("th")).SetText("n")
 	header.AddElement(gowd.NewElement("th")).SetText("xn")

@@ -5,9 +5,10 @@
     <title>Title</title>
 </head>
 <body>
-<div class="problem_panel" id="problem_panel">
+<div class="container text-nowrap">
+<div class="jumbotron" id="problem_panel">
     <h2>Problem</h2>
-    <div class="problem_tab" id="what">
+    <div class="card p-3" id="what">
         <label for="type_selector">What kind of problem do you want to solve?</label><select id="type_selector">
             <option value="none" selected="selected">----Select an option----</option>
             <option value="single">Single-variable equation</option>
@@ -15,13 +16,13 @@
             <option value="inter">Interpolation</option>
         </select>
     </div>
-    <div id="single_problem_panel">
-        <div class="problem_tab" id="which">
+    <div id="single_problem_panel" class="card p-3">
+        <div class="card p-3" id="which">
             <p>What's your problem?</p>
-            <label for="single_problem_def">f(x) = </label>
-            <input class="single_problem_def" placeholder="Enter your problem here" id="single_problem_def">
+            <label for="single_problem_def" class="d-inline">f(x) = </label>
+            <input class="d-inlinef" placeholder="Enter your problem here" id="single_problem_def">
         </div>
-        <div class="problem_tab" id="how">
+        <div class="card p-3" id="how">
             <label for="single_method_selector">How do you want to solve your problem?</label><select id="single_method_selector">
                 <option value="none" selected="selected">----Select an option----</option>
                 <option value="search">Incremental Search</option>
@@ -36,7 +37,7 @@
             <div id="dfin"><label for="df">f'(x) = </label><input class="df_input" placeholder="?" id="df"></div>
             <div id="d2fin"><label for="d2f">f''(x) = </label><input class="d2f_input" placeholder="?" id="d2f"></div>
         </div>
-        <div class="single_problem_tab" id="single_data">
+        <div class="card p-3" id="single_data">
             <div id="x1in"><label>First X value
                     <input type="number" id="x1">
              </label></div>
@@ -62,19 +63,19 @@
             </div>
         </div>
     </div>
-    <div id="system_problem_panel">
+    <div id="system_problem_panel" class="card p-3">
         <div id="nvarsin"><label>How many variables? <input type="number" min="2" step="1" id="n_vars"></label></div>
         <div id="matrix_in">
-            <input type="button" id="A_button" value="Enter the coefficient matrix">
-            <input type="button" id="B_button" value="Enter the independent terms vector">
+            <input type="button" id="A_button" value="Enter the coefficient matrix" class="btn btn-secondary text-light">
+            <input type="button" id="B_button" value="Enter the independent terms vector" class="btn btn-secondary text-light">
         </div>
-        <div id="matrix_modal">
+        <div id="matrix_modal" class="card p-3">
 
         </div>
-        <div id="vector_modal">
+        <div id="vector_modal" class="card p-3">
 
         </div>
-        <div class="problem_tab" id="se_methods">
+        <div class="card p-3" id="se_methods">
             <label for="system_method_selector">How do you want to solve your problem?</label><select id="system_method_selector">
                 <option value="none" selected="selected">----Select an option----</option>
                 <option value="gauss">Gaussian Elimination</option>
@@ -87,7 +88,7 @@
                 <option value="gauss_seidel">Gauss-Seidel Relaxed</option>
             </select>
         </div>
-        <div id="system_data">
+        <div id="system_data" class="card p-3">
 
             <div id="SE_tolin"><label>Tolerance
                     <input type="number" min="0" id="SE_tol">
@@ -118,18 +119,14 @@
         </div>
 
     </div>
-    <div id="interpolation_problem_panel">
+    <div id="interpolation_problem_panel" class="card p-3">
 
     </div>
-    <input type="button" id="submit_button" value="Solve">
+    <input type="button" id="submit_button" value="Solve" class="btn btn-primary text-dark">
 </div>
-<div class="solution_panel" id="solution_panel">
-    <h2>Solution</h2>
-    <div id="single_solution">
-        <div id="plot"></div>
-        <div id="result_table"></div>
-        <div id="result"></div>
-    </div>
+<div class="jumbotron" id="solution_panel">
+
+</div>
 </div>
 </body>
 </html>
