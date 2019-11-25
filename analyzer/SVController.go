@@ -20,11 +20,35 @@ func solveSingleEquation() {
 	panel.Show()
 	switch em["single_method_selector"].GetValue() {
 	case "bisection":
-		a, _ := strconv.ParseFloat(em["x1"].GetValue(), 64)
-		b, _ := strconv.ParseFloat(em["x2"].GetValue(), 64)
-		tol, _ := strconv.ParseFloat(em["tol"].GetValue(), 64)
-		maxit, _ := strconv.ParseInt(em["it"].GetValue(), 10, 32)
-		ans := svanalyzer.Bisection(a, b, tol, uint(math.Abs(float64(maxit))))
+		a, err := strconv.ParseFloat(em["x1"].GetValue(), 64)
+		if err != nil {
+			titl := gowd.NewElement("h3")
+			titl.SetText("Bad In")
+			em["solution_panel"].AddElement(titl)
+			return
+		}
+		b, err := strconv.ParseFloat(em["x2"].GetValue(), 64)
+		if err != nil {
+			titl := gowd.NewElement("h3")
+			titl.SetText("Bad In")
+			em["solution_panel"].AddElement(titl)
+			return
+		}
+		tol, err := strconv.ParseFloat(em["tol"].GetValue(), 64)
+		if err != nil {
+			titl := gowd.NewElement("h3")
+			titl.SetText("Bad In")
+			em["solution_panel"].AddElement(titl)
+			return
+		}
+		maxit, err := strconv.ParseInt(em["it"].GetValue(), 10, 32)
+		if err != nil {
+			titl := gowd.NewElement("h3")
+			titl.SetText("Bad In")
+			em["solution_panel"].AddElement(titl)
+			return
+		}
+		ans := svanalyzer.Bisection(a, b, math.Abs(tol), uint(math.Abs(float64(maxit))))
 		if !ans.BadIn && !ans.IsAlmostRoot && !ans.IsRoot {
 			panel.AddElement(gowd.NewElement("h2")).SetText("Not enough iterations.")
 			loadBisTable(panel)
@@ -39,11 +63,35 @@ func solveSingleEquation() {
 		}
 
 	case "false_pos":
-		a, _ := strconv.ParseFloat(em["x1"].GetValue(), 64)
-		b, _ := strconv.ParseFloat(em["x2"].GetValue(), 64)
-		tol, _ := strconv.ParseFloat(em["tol"].GetValue(), 64)
-		maxit, _ := strconv.ParseInt(em["it"].GetValue(), 10, 32)
-		ans := svanalyzer.FalsePosition(a, b, tol, uint(math.Abs(float64(maxit))))
+		a, err := strconv.ParseFloat(em["x1"].GetValue(), 64)
+		if err != nil {
+			titl := gowd.NewElement("h3")
+			titl.SetText("Bad In")
+			em["solution_panel"].AddElement(titl)
+			return
+		}
+		b, err := strconv.ParseFloat(em["x2"].GetValue(), 64)
+		if err != nil {
+			titl := gowd.NewElement("h3")
+			titl.SetText("Bad In")
+			em["solution_panel"].AddElement(titl)
+			return
+		}
+		tol, err := strconv.ParseFloat(em["tol"].GetValue(), 64)
+		if err != nil {
+			titl := gowd.NewElement("h3")
+			titl.SetText("Bad In")
+			em["solution_panel"].AddElement(titl)
+			return
+		}
+		maxit, err := strconv.ParseInt(em["it"].GetValue(), 10, 32)
+		if err != nil {
+			titl := gowd.NewElement("h3")
+			titl.SetText("Bad In")
+			em["solution_panel"].AddElement(titl)
+			return
+		}
+		ans := svanalyzer.FalsePosition(a, b, math.Abs(tol), uint(math.Abs(float64(maxit))))
 		if !ans.BadIn && !ans.IsAlmostRoot && !ans.IsRoot {
 			panel.AddElement(gowd.NewElement("h2")).SetText("Not enough iterations.")
 			loadFalTable(panel)
@@ -57,11 +105,35 @@ func solveSingleEquation() {
 			panel.AddElement(gowd.NewElement("h2")).SetText("Bad In.")
 		}
 	case "secant":
-		a, _ := strconv.ParseFloat(em["x1"].GetValue(), 64)
-		b, _ := strconv.ParseFloat(em["x2"].GetValue(), 64)
-		tol, _ := strconv.ParseFloat(em["tol"].GetValue(), 64)
-		maxit, _ := strconv.ParseInt(em["it"].GetValue(), 10, 32)
-		ans := svanalyzer.Secant(a, b, tol, uint(math.Abs(float64(maxit))))
+		a, err := strconv.ParseFloat(em["x1"].GetValue(), 64)
+		if err != nil {
+			titl := gowd.NewElement("h3")
+			titl.SetText("Bad In")
+			em["solution_panel"].AddElement(titl)
+			return
+		}
+		b, err := strconv.ParseFloat(em["x2"].GetValue(), 64)
+		if err != nil {
+			titl := gowd.NewElement("h3")
+			titl.SetText("Bad In")
+			em["solution_panel"].AddElement(titl)
+			return
+		}
+		tol, err := strconv.ParseFloat(em["tol"].GetValue(), 64)
+		if err != nil {
+			titl := gowd.NewElement("h3")
+			titl.SetText("Bad In")
+			em["solution_panel"].AddElement(titl)
+			return
+		}
+		maxit, err := strconv.ParseInt(em["it"].GetValue(), 10, 32)
+		if err != nil {
+			titl := gowd.NewElement("h3")
+			titl.SetText("Bad In")
+			em["solution_panel"].AddElement(titl)
+			return
+		}
+		ans := svanalyzer.Secant(a, b, math.Abs(tol), uint(math.Abs(float64(maxit))))
 		if !ans.BadIn && !ans.IsAlmostRoot && !ans.IsRoot {
 			panel.AddElement(gowd.NewElement("h2")).SetText("Not enough iterations.")
 			loadSecTable(panel)
@@ -76,9 +148,27 @@ func solveSingleEquation() {
 		}
 
 	case "search":
-		x0, _ := strconv.ParseFloat(em["x1"].GetValue(), 64)
-		dx, _ := strconv.ParseFloat(em["dx"].GetValue(), 64)
-		maxit, _ := strconv.ParseInt(em["it"].GetValue(), 10, 32)
+		x0, err := strconv.ParseFloat(em["x1"].GetValue(), 64)
+		if err != nil {
+			titl := gowd.NewElement("h3")
+			titl.SetText("Bad In")
+			em["solution_panel"].AddElement(titl)
+			return
+		}
+		dx, err := strconv.ParseFloat(em["dx"].GetValue(), 64)
+		if err != nil {
+			titl := gowd.NewElement("h3")
+			titl.SetText("Bad In")
+			em["solution_panel"].AddElement(titl)
+			return
+		}
+		maxit, err := strconv.ParseInt(em["it"].GetValue(), 10, 32)
+		if err != nil {
+			titl := gowd.NewElement("h3")
+			titl.SetText("Bad In")
+			em["solution_panel"].AddElement(titl)
+			return
+		}
 		ans := svanalyzer.IncrementalSearch(x0, dx, uint(math.Abs(float64(maxit))))
 		if !ans.IsRange && !ans.IsRoot {
 			panel.AddElement(gowd.NewElement("h2")).SetText("Not enough iterations.")
@@ -88,15 +178,36 @@ func solveSingleEquation() {
 			panel.AddElement(gowd.NewElement("h2")).SetText("There's a root between " + strconv.FormatFloat(ans.A, 'g', 3, 64) + " and " + strconv.FormatFloat(ans.B, 'E', 3, 64) + ".")
 		}
 	case "fixed_point":
-		x0, _ := strconv.ParseFloat(em["x1"].GetValue(), 64)
-		tol, _ := strconv.ParseFloat(em["tol"].GetValue(), 64)
-		maxit, _ := strconv.ParseInt(em["it"].GetValue(), 10, 32)
-		g := em["g"].GetValue()
-		err := svanalyzer.SetG(g)
+		x0, err := strconv.ParseFloat(em["x1"].GetValue(), 64)
 		if err != nil {
+			titl := gowd.NewElement("h3")
+			titl.SetText("Bad In")
+			em["solution_panel"].AddElement(titl)
 			return
 		}
-		ans := svanalyzer.FixedPoint(x0, tol, uint(math.Abs(float64(maxit))))
+		tol, err := strconv.ParseFloat(em["tol"].GetValue(), 64)
+		if err != nil {
+			titl := gowd.NewElement("h3")
+			titl.SetText("Bad In")
+			em["solution_panel"].AddElement(titl)
+			return
+		}
+		maxit, err := strconv.ParseInt(em["it"].GetValue(), 10, 32)
+		if err != nil {
+			titl := gowd.NewElement("h3")
+			titl.SetText("Bad In")
+			em["solution_panel"].AddElement(titl)
+			return
+		}
+		g := em["g"].GetValue()
+		err = svanalyzer.SetG(g)
+		if err != nil {
+			titl := gowd.NewElement("h3")
+			titl.SetText("Bad In")
+			em["solution_panel"].AddElement(titl)
+			return
+		}
+		ans := svanalyzer.FixedPoint(x0, math.Abs(tol), uint(math.Abs(float64(maxit))))
 		if !ans.BadIn && !ans.IsAlmostRoot && !ans.IsRoot {
 			panel.AddElement(gowd.NewElement("h2")).SetText("Not enough iterations.")
 			loadFixTable(panel)
@@ -110,15 +221,33 @@ func solveSingleEquation() {
 			panel.AddElement(gowd.NewElement("h2")).SetText("Bad In.")
 		}
 	case "newton":
-		x0, _ := strconv.ParseFloat(em["x1"].GetValue(), 64)
-		tol, _ := strconv.ParseFloat(em["tol"].GetValue(), 64)
-		maxit, _ := strconv.ParseInt(em["it"].GetValue(), 10, 32)
+		x0, err := strconv.ParseFloat(em["x1"].GetValue(), 64)
+		if err != nil {
+			titl := gowd.NewElement("h3")
+			titl.SetText("Bad In")
+			em["solution_panel"].AddElement(titl)
+			return
+		}
+		tol, err := strconv.ParseFloat(em["tol"].GetValue(), 64)
+		if err != nil {
+			titl := gowd.NewElement("h3")
+			titl.SetText("Bad In")
+			em["solution_panel"].AddElement(titl)
+			return
+		}
+		maxit, err := strconv.ParseInt(em["it"].GetValue(), 10, 32)
+		if err != nil {
+			titl := gowd.NewElement("h3")
+			titl.SetText("Bad In")
+			em["solution_panel"].AddElement(titl)
+			return
+		}
 		df := em["df"].GetValue()
-		err := svanalyzer.SetDF(df)
+		err = svanalyzer.SetDF(df)
 		if err != nil {
 			return
 		}
-		ans := svanalyzer.Newton(x0, tol, uint(math.Abs(float64(maxit))))
+		ans := svanalyzer.Newton(x0, math.Abs(tol), uint(math.Abs(float64(maxit))))
 		if !ans.BadIn && !ans.IsAlmostRoot && !ans.IsRoot {
 			panel.AddElement(gowd.NewElement("h2")).SetText("Not enough iterations.")
 			loadNewTable(panel)
@@ -132,11 +261,29 @@ func solveSingleEquation() {
 			panel.AddElement(gowd.NewElement("h2")).SetText("Bad In.")
 		}
 	case "multi":
-		x0, _ := strconv.ParseFloat(em["x1"].GetValue(), 64)
-		tol, _ := strconv.ParseFloat(em["tol"].GetValue(), 64)
-		maxit, _ := strconv.ParseInt(em["it"].GetValue(), 10, 32)
+		x0, err := strconv.ParseFloat(em["x1"].GetValue(), 64)
+		if err != nil {
+			titl := gowd.NewElement("h3")
+			titl.SetText("Bad In")
+			em["solution_panel"].AddElement(titl)
+			return
+		}
+		tol, err := strconv.ParseFloat(em["tol"].GetValue(), 64)
+		if err != nil {
+			titl := gowd.NewElement("h3")
+			titl.SetText("Bad In")
+			em["solution_panel"].AddElement(titl)
+			return
+		}
+		maxit, err := strconv.ParseInt(em["it"].GetValue(), 10, 32)
+		if err != nil {
+			titl := gowd.NewElement("h3")
+			titl.SetText("Bad In")
+			em["solution_panel"].AddElement(titl)
+			return
+		}
 		df := em["df"].GetValue()
-		err := svanalyzer.SetDF(df)
+		err = svanalyzer.SetDF(df)
 		if err != nil {
 			return
 		}

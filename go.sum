@@ -4,6 +4,8 @@ github.com/CalculaThor/CalculaThor/analyzer v0.0.0-20191110215701-9fc80f1bdfde h
 github.com/CalculaThor/CalculaThor/analyzer v0.0.0-20191110215701-9fc80f1bdfde/go.mod h1:9M5Y4angxtC9KjpK4Hm4Uet/rXEn5VToIU2ZzEkjajI=
 github.com/CalculaThor/CalculaThor/analyzer v0.0.0-20191110232331-384c76640fc2 h1:hKyFPQVGiNtlb/VBJTLtPdA51RApGE4y2FlpK7rmJlQ=
 github.com/CalculaThor/CalculaThor/analyzer v0.0.0-20191110232331-384c76640fc2/go.mod h1:9M5Y4angxtC9KjpK4Hm4Uet/rXEn5VToIU2ZzEkjajI=
+github.com/CalculaThor/CalculaThor/analyzer/ipanalyzer v0.0.0-20191125054046-9868a48780cd h1:iU7CQuIIW9Ax+FtNG0Je3PsrSQZrUwU5FMg4Qy/0fDs=
+github.com/CalculaThor/CalculaThor/analyzer/ipanalyzer v0.0.0-20191125054046-9868a48780cd/go.mod h1:fuQs04ueRn30GSTpHo3QUHTWEuI7voK1rNTeFEOrCUU=
 github.com/CalculaThor/CalculaThor/analyzer/seanalyzer v0.0.0-20191123221214-bf516a3c3244 h1:Xvs5TzEgz7iAZjN1TUKirpOZ/KyPWjCChTbjLkmgiow=
 github.com/CalculaThor/CalculaThor/analyzer/seanalyzer v0.0.0-20191123221214-bf516a3c3244/go.mod h1:Ncmwsr89DbM0SISZLB/cP6ctsid5g68pFupyco6pVpU=
 github.com/CalculaThor/CalculaThor/analyzer/seanalyzer v0.0.0-20191124050323-b659a4f532a9 h1:eINIFPON/uBN3+qDdaMjwkMwSMs1SelK9hYfDZa+edc=
