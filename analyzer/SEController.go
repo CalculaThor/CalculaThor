@@ -20,60 +20,117 @@ func solveSystemOfEquations() {
 	switch em["system_method_selector"].GetValue() {
 	case "gauss":
 		ans := seanalyzer.Gauss()
+		if seanalyzer.BadIn() {
+			titl := gowd.NewElement("h4")
+			titl.SetText("Bad In")
+			em["solution_panel"].AddElement(titl)
+		}
 		showResults(ans)
 		showStages1(seanalyzer.GetGaussSimpleStages())
 	case "ppivoting":
 		ans := seanalyzer.GaussPartialPivoting()
+		if seanalyzer.BadIn() {
+			titl := gowd.NewElement("h4")
+			titl.SetText("Bad In")
+			em["solution_panel"].AddElement(titl)
+		}
 		showResults(ans)
 		showStages1(seanalyzer.GetGaussPartialStages())
 	case "tpivoting":
 		ans := seanalyzer.GaussTotalPivoting()
+		if seanalyzer.BadIn() {
+			titl := gowd.NewElement("h4")
+			titl.SetText("Bad In")
+			em["solution_panel"].AddElement(titl)
+		}
 		showResults(ans)
 		showStages2(seanalyzer.GetGaussTotalStages())
 	case "doolittle":
 		ans := seanalyzer.DoolittleFactorization()
+		if seanalyzer.BadIn() {
+			titl := gowd.NewElement("h4")
+			titl.SetText("Bad In")
+			em["solution_panel"].AddElement(titl)
+		}
 		showResults(ans)
 		showStages3(seanalyzer.GetDoolittleStages())
 	case "croud":
 		ans := seanalyzer.CroutFactorization()
+		if seanalyzer.BadIn() {
+			titl := gowd.NewElement("h4")
+			titl.SetText("Bad In")
+			em["solution_panel"].AddElement(titl)
+		}
 		showResults(ans)
 		showStages3(seanalyzer.GetCroutStages())
 	case "cholesky":
 		ans := seanalyzer.CholeskyFactorization()
+		if seanalyzer.BadIn() {
+			titl := gowd.NewElement("h4")
+			titl.SetText("Bad In")
+			em["solution_panel"].AddElement(titl)
+		}
 		showResults(ans)
 		showStages3(seanalyzer.GetCholeskyStages())
 	case "jacobi":
 		tol, err := strconv.ParseFloat(em["SE_tol"].GetValue(), 64)
 		if err != nil {
 			badIn = true
+			titl := gowd.NewElement("h4")
+			titl.SetText("Bad In")
+			em["solution_panel"].AddElement(titl)
 			return
 		}
 		it, err := strconv.Atoi(em["SE_it"].GetValue())
 		if err != nil {
 			badIn = true
+			titl := gowd.NewElement("h4")
+			titl.SetText("Bad In")
+			em["solution_panel"].AddElement(titl)
 			return
 		}
-		ans, _, _ := seanalyzer.Jacobi(loadInitialValues(), tol, uint(it))
-		showResultsSlice(ans)
+		ans, _, ok := seanalyzer.Jacobi(loadInitialValues(), tol, uint(it))
+		if ok {
+			showResultsSlice(ans)
+		} else {
+			titl := gowd.NewElement("h4")
+			titl.SetText("Not enough iterations")
+			em["solution_panel"].AddElement(titl)
+		}
 		showStages4(seanalyzer.GetJacobiTable())
 	case "gauss_seidel":
 		tol, err := strconv.ParseFloat(em["SE_tol"].GetValue(), 64)
 		if err != nil {
 			badIn = true
+			titl := gowd.NewElement("h4")
+			titl.SetText("Bad In")
+			em["solution_panel"].AddElement(titl)
 			return
 		}
 		w, err := strconv.ParseFloat(em["w"].GetValue(), 64)
 		if err != nil {
 			badIn = true
+			titl := gowd.NewElement("h4")
+			titl.SetText("Bad In")
+			em["solution_panel"].AddElement(titl)
 			return
 		}
 		it, err := strconv.Atoi(em["SE_it"].GetValue())
 		if err != nil {
 			badIn = true
+			titl := gowd.NewElement("h4")
+			titl.SetText("Bad In")
+			em["solution_panel"].AddElement(titl)
 			return
 		}
-		ans, _, _ := seanalyzer.GaussSeidelRelaxed(loadInitialValues(), w, tol, uint(it))
-		showResultsSlice(ans)
+		ans, _, ok := seanalyzer.GaussSeidelRelaxed(loadInitialValues(), w, tol, uint(it))
+		if ok {
+			showResultsSlice(ans)
+		} else {
+			titl := gowd.NewElement("h4")
+			titl.SetText("Not enough iterations")
+			em["solution_panel"].AddElement(titl)
+		}
 		showStages4(seanalyzer.GetGaussSeidelTable())
 	default:
 		em["solution_panel"].Hide()
@@ -86,6 +143,9 @@ func setN() {
 	n, err := strconv.Atoi(em["n_vars"].GetValue())
 	if err != nil {
 		badIn = true
+		titl := gowd.NewElement("h4")
+		titl.SetText("Bad In")
+		em["solution_panel"].AddElement(titl)
 		return
 	}
 	nVars = n
@@ -324,6 +384,7 @@ func showStages2(stages []seanalyzer.Reg2) {
 			el.SetText(fmt.Sprintf("%d", n))
 			indRow.AddElement(el)
 		}
+		ind.AddElement(indRow)
 		div.AddElement(ind)
 
 		stagesDiv.AddElement(div)
