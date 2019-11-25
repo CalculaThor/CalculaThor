@@ -56,6 +56,11 @@ func (p *ProblemPanel) openProblem(sender *gowd.Element, event *gowd.EventElemen
 		em["system_problem_panel"].Show()
 		em["interpolation_problem_panel"].Hide()
 		beginSystemProblem()
+	case "inter":
+		em["single_problem_panel"].Hide()
+		em["system_problem_panel"].Hide()
+		em["interpolation_problem_panel"].Show()
+		beginInterpolationProblem()
 	}
 }
 

@@ -72,14 +72,14 @@ func enterMatrix(sender *gowd.Element, event *gowd.EventElement) {
 	ok.SetAttribute("type", "button")
 	ok.SetID("vector_ok")
 	ok.SetValue("Ok")
-	ok.SetClass("btn btn-secondary text-light")
+	ok.SetClass("btn btn-secondary text-light m-3")
 	ok.OnEvent("onclick", checkMatrix)
 
 	random := gowd.NewElement("input")
 	random.SetAttribute("type", "button")
 	random.SetID("vector_random")
 	random.SetValue("Generate random numbers")
-	random.SetClass("btn btn-secondary text-light")
+	random.SetClass("btn btn-secondary text-light m-3")
 	random.OnEvent("onclick", generateMatrix)
 
 	mod.AddElement(ok)
@@ -115,14 +115,14 @@ func enterVector(sender *gowd.Element, event *gowd.EventElement) {
 	ok.SetAttribute("type", "button")
 	ok.SetID("matrix_ok")
 	ok.SetValue("Ok")
-	ok.SetClass("btn btn-secondary text-light")
+	ok.SetClass("btn btn-secondary text-light m-3")
 	ok.OnEvent("onclick", checkVector)
 
 	random := gowd.NewElement("input")
 	random.SetAttribute("type", "button")
 	random.SetID("matrix_random")
 	random.SetValue("Generate random numbers")
-	random.SetClass("btn btn-secondary text-light")
+	random.SetClass("btn btn-secondary text-light m-3")
 	random.OnEvent("onclick", generateVector)
 
 	mod.AddElement(ok)

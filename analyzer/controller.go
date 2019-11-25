@@ -25,7 +25,7 @@ func initSolution(sender *gowd.Element, event *gowd.EventElement) {
 	case "system":
 		solveSystemOfEquations()
 	case "inter":
-
+		solveInterpolation()
 	default:
 	}
 }

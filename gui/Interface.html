@@ -19,8 +19,8 @@
     <div id="single_problem_panel" class="card p-3">
         <div class="card p-3" id="which">
             <p>What's your problem?</p>
-            <label for="single_problem_def" class="d-inline">f(x) = </label>
-            <input class="d-inlinef" placeholder="Enter your problem here" id="single_problem_def">
+            <div><label for="single_problem_def" class="d-inline">f(x) = </label>
+            <input class="d-inlinef" placeholder="Enter your problem here" id="single_problem_def"></div>
         </div>
         <div class="card p-3" id="how">
             <label for="single_method_selector">How do you want to solve your problem?</label><select id="single_method_selector">
@@ -39,21 +39,21 @@
         </div>
         <div class="card p-3" id="single_data">
             <div id="x1in"><label>First X value
-                    <input type="number" id="x1">
+                    <input type="number" id="x1" class="m-3">
              </label></div>
 
             <div id="x2in"><label>Second X value
-                    <input type="number" id="x2">
+                    <input type="number" id="x2" class="m-3">
             </label></div>
             <div id="dxin"><label>Delta
-                <input type="number" id="dx">
+                <input type="number" id="dx" class="m-3">
             </label></div>
             <div id="tolin"><label>Tolerance
-                <input type="number" min="0" id="tol">
+                <input type="number" min="0" id="tol" class="m-3">
             </label></div>
 
             <div id="itin"><label>Max. Iterations
-                <input type="number" min="1" step="1" id="it">
+                <input type="number" min="1" step="1" id="it" class="m-3">
             </label></div>
             <div id="absolute">
                 <label for="abs">Absolute Error</label><input type="radio" name="error" value="absolute" id="abs" checked>
@@ -64,10 +64,10 @@
         </div>
     </div>
     <div id="system_problem_panel" class="card p-3">
-        <div id="nvarsin"><label>How many variables? <input type="number" min="2" step="1" id="n_vars"></label></div>
+        <div id="nvarsin"><label>How many variables? <input type="number" min="2" step="1" id="n_vars" class="m-3"></label></div>
         <div id="matrix_in">
-            <input type="button" id="A_button" value="Enter the coefficient matrix" class="btn btn-secondary text-light">
-            <input type="button" id="B_button" value="Enter the independent terms vector" class="btn btn-secondary text-light">
+            <input type="button" id="A_button" value="Enter the coefficient matrix" class="btn btn-secondary text-light m-3">
+            <input type="button" id="B_button" value="Enter the independent terms vector" class="btn btn-secondary text-light m-3">
         </div>
         <div id="matrix_modal" class="card p-3">
 
@@ -91,11 +91,11 @@
         <div id="system_data" class="card p-3">
 
             <div id="SE_tolin"><label>Tolerance
-                    <input type="number" min="0" id="SE_tol">
+                    <input type="number" min="0" id="SE_tol" class="m-3">
                 </label>
             </div>
             <div id="SE_itin"><label>Max. Iterations
-                    <input type="number" min="1" step="1" id="SE_it">
+                    <input type="number" min="1" step="1" id="SE_it" class="m-3">
                 </label>
             </div>
             <div id="w_in"><label>w
@@ -120,7 +120,21 @@
 
     </div>
     <div id="interpolation_problem_panel" class="card p-3">
-
+        <div id="npointsin"><label>How many points? <input type="number" min="2" step="1" id="n_points" class="m-3"></label></div>
+        <input type="button" id="points_button" value="Enter the points" class="btn btn-secondary text-light m-3">
+        <div id="points_in" class="card p-3"></div>
+        <div class="card p-3 m-4" id="ip_methods">
+            <label for="ip_method_selector">How do you want to solve your problem?</label><select id="ip_method_selector">
+                <option value="none" selected="selected">----Select an option----</option>
+                <option value="newton">Newton's divided difference</option>
+                <option value="lagrange">Lagrange polynomials</option>
+                <option value="neville">Neville's</option>
+            </select>
+        </div>
+        <div id="xip_in" class="p-2 text-center"><label>Value to interpolate
+                <input type="number" step=any id="x_ip" class="m-3">
+            </label>
+        </div>
     </div>
     <input type="button" id="submit_button" value="Solve" class="btn btn-primary text-dark">
 </div>
