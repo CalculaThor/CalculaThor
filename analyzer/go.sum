@@ -1,3 +1,6 @@
+github.com/CalculaThor/CalculaThor v0.0.0-20191125054046-9868a48780cd h1:w2JC/5Z5nVqA5Izl+JfCKUL89HeTQqwlqBLeyDUJH30=
+github.com/CalculaThor/CalculaThor/analyzer/ipanalyzer v0.0.0-20191125054046-9868a48780cd h1:iU7CQuIIW9Ax+FtNG0Je3PsrSQZrUwU5FMg4Qy/0fDs=
+github.com/CalculaThor/CalculaThor/analyzer/ipanalyzer v0.0.0-20191125054046-9868a48780cd/go.mod h1:fuQs04ueRn30GSTpHo3QUHTWEuI7voK1rNTeFEOrCUU=
 github.com/CalculaThor/CalculaThor/analyzer/seanalyzer v0.0.0-20191123221214-bf516a3c3244/go.mod h1:Ncmwsr89DbM0SISZLB/cP6ctsid5g68pFupyco6pVpU=
 github.com/CalculaThor/CalculaThor/analyzer/svanalyzer v0.0.0-20191110213849-84d6fe5f5999 h1:U/5FDLzV5q0sFwfdUwnZbfXwlP36ZwZvbKbofb2WEmE=
 github.com/CalculaThor/CalculaThor/analyzer/svanalyzer v0.0.0-20191110213849-84d6fe5f5999/go.mod h1:s779Oo9Crq5FnD39q5odqu117tUhxpKMUjTrszQ0SpU=
