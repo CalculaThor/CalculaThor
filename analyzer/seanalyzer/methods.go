@@ -71,6 +71,9 @@ func GaussElimination() *mat.Dense {
 	Ab.Augment(coeff, terms)
 	gSimStages = append(gSimStages, Reg1{mat.DenseCopyOf(Ab), make(map[Index]float64, 0)})
 	for k := 0; k < n-1; k++ {
+		for rnd := k + 1;Ab.At(k, k) == 0 && rnd < n-1; rnd++ {
+			swapRows(Ab, k, rnd)
+		}
 		mults := make(map[Index]float64)
 		for i := k + 1; i < n; i++ {
 			mult := Ab.At(i, k) / Ab.At(k, k)
