@@ -20,6 +20,8 @@ github.com/CalculaThor/CalculaThor/analyzer/svanalyzer v0.0.0-20191111021202-54d
 github.com/CalculaThor/CalculaThor/analyzer/svanalyzer v0.0.0-20191111021202-54dbc6bebc29/go.mod h1:s779Oo9Crq5FnD39q5odqu117tUhxpKMUjTrszQ0SpU=
 github.com/CalculaThor/CalculaThor/analyzer/svanalyzer v0.0.0-20191111040314-28a9366a5447 h1:r7kMQtR2XEzsb2p9T1d2zbXeKp4ALXToafMzngraZRE=
 github.com/CalculaThor/CalculaThor/analyzer/svanalyzer v0.0.0-20191111040314-28a9366a5447/go.mod h1:s779Oo9Crq5FnD39q5odqu117tUhxpKMUjTrszQ0SpU=
+github.com/CalculaThor/CalculaThor/analyzer/svanalyzer v0.0.0-20200415203310-aa37ae6e9bf1 h1:GR7GWADRzQ+dppm3F+9gbMppFneG5O9DoI7qehXU28w=
+github.com/CalculaThor/CalculaThor/analyzer/svanalyzer v0.0.0-20200415203310-aa37ae6e9bf1/go.mod h1:s779Oo9Crq5FnD39q5odqu117tUhxpKMUjTrszQ0SpU=
 github.com/CalculaThor/CalculaThor/gui v0.0.0-20191110215117-1b851d185092 h1:lqYxKVHUKHRI5eeYn8J1j7hPbgpaPLewgvFpvhjYY1Q=
 github.com/CalculaThor/CalculaThor/gui v0.0.0-20191110215117-1b851d185092/go.mod h1:Xynye14h+rYZ58KrPkztpUNfCkCRlvM8dgkeAEQ2h6k=
 github.com/Knetic/govaluate v3.0.0+incompatible h1:7o6+MAPhYTCF0+fdvoz1xDedhRb4f6s9Tn1Tt7/WTEg=
